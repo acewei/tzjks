@@ -1,0 +1,174 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainForStudent.master.cs" Inherits="hchMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+     <link rel="stylesheet" href="../Content/bootstrap.min.css" />
+    <script src="../Scripts/jquery-1.9.0.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        html, body {
+            height: 100%
+        }
+        /*div{height:100%}*/
+        .div1 {
+            width: 100%;
+            height: 92px;
+            float: left;
+            background: #8080C0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .div23 {
+            width: 100%;
+            height: 77%;
+            float: left;
+            margin-top: 92px;
+        }
+
+        .div2 {
+            width: 20%;
+            height: 711px;
+            float: left;
+            margin-top: 2px;
+            margin-right: 1px;
+            background: #68DFFB;
+            position: fixed;
+            top: 101px;
+            left: 0px;
+        }
+
+        .div3 {
+            width: 77%;
+            float: right;
+            margin-top: 2px;
+            background: #FFFFFF;
+            min-height: 500px;
+            max-height: 900px;
+            overflow: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu {
+            font-size: 12px;
+        }
+
+            .menu li { /*水平菜单*/
+                float: left;
+                list-style: none;
+                position: relative; /*把包含块移动li元素*/
+            }
+
+            .menu a {
+                display: block;
+                height: 32px;
+                width: 100px;
+                line-height: 32px;
+                background: #a9ea00;
+                color: #ff8040;
+                text-decoration: none;
+                text-align: center;
+                overflow: hidden; /*★★★★*/
+            }
+
+            .menu table {
+                border-collapse: collapse;
+            }
+
+        .auto-style1 {
+            width: 100%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+
+        .auto-style2 {
+            height: 22px;
+        }
+
+        .auto-style4 {
+            width: 33%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+
+        .auto-style5 {
+            width: 39%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+    </style>
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <div>
+            <div class="div1">
+
+                <table class="auto-style1">
+                    <tr>
+                        <td class="auto-style5" style="font-size: 55px; font-weight: 900; font-style: italic">勤工助学管理系统</td>
+                        <td class="auto-style4">&nbsp;</td>
+                        <td class="auto-style2">&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp<%=Session["username"] %>
+                  &nbsp;&nbsp;&nbsp;
+                  <asp:Button ID="zhuxiao" class="btn btn-danger" data-loading-text="注销"
+                      type="button" runat="server" Text="注销" OnClick="zhuxiao_Click" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="div23">
+                <div class="div2">
+                    <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" NodeIndent="15" ShowLines="True" Width="154px" Font-Bold="True" Font-Names="黑体" Font-Size="Large" Font-Strikeout="False" ForeColor="Black" Height="125px" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
+                        <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
+
+                        <LevelStyles>
+                            <asp:TreeNodeStyle Font-Size="26px" />
+                        </LevelStyles>
+                        <Nodes>
+                            <asp:TreeNode Text="学生个人信息管理" Value="初始数据输入">
+                                <asp:TreeNode Text="学生个人信息查看、修改" Value="学生基础信息（修改、查询）" NavigateUrl="~/u_student/StudentInfo.aspx"></asp:TreeNode>
+                                <asp:TreeNode Text="考勤情况查询" Value="学生个人工资查看" Expanded="False" NavigateUrl="~/u_student/StudentWorkCheck.aspx"></asp:TreeNode>
+                                <asp:TreeNode NavigateUrl="~/u_student/StudentPS.aspx" Text="工资查询" Value="工资查询"></asp:TreeNode>
+                                <asp:TreeNode Text="修改密码" Value="修改密码"></asp:TreeNode>
+                            </asp:TreeNode>
+                            <asp:TreeNode Text="岗位" Value="岗位申请">
+                                <asp:TreeNode Text="查看、申请岗位" Value="查看岗位信息" NavigateUrl="~/u_student/Apply.aspx"></asp:TreeNode>
+                            </asp:TreeNode>
+                        </Nodes>
+                        <NodeStyle Font-Names="Tahoma" Font-Size="Small" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
+                        <ParentNodeStyle Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" ForeColor="#000066" />
+                        <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" />
+                    </asp:TreeView>
+                </div>
+                <div class="div3">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        
+                    </asp:ContentPlaceHolder>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+</body>
+</html>

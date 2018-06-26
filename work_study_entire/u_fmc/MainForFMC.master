@@ -1,0 +1,187 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainForFMC.master.cs" Inherits="hchMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+      <link rel="stylesheet" href="../css/css.css" />
+     <link rel="stylesheet" href="../css/style.css" />
+   <link rel="stylesheet" href="../Content/bootstrap.min.css" />
+    <script src="../css/tab.js"></script>
+    <script src="../Scripts/jquery-1.9.0.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        html, body {
+            height: 100%
+        }
+
+        .div1 {
+            width: 100%;
+            height: 92px;
+            float: left;
+            background: #8080C0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .div23 {
+            width: 100%;
+            height: 77%;
+            float: left;
+            margin-top: 92px;
+        }
+
+        .div2 {
+            width: 20%;
+            height: 711px;
+            float: left;
+            margin-top: 2px;
+            margin-right: 1px;
+            background: #68DFFB;
+            position: fixed;
+            top: 101px;
+            left: 0px;
+        }
+
+        .div3 {
+            width: 77%;
+            float: right;
+            margin-top: 2px;
+            background: #FFFFFF;
+            min-height: 700px;
+            max-height: 900px;
+            overflow: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu {
+            font-size: 12px;
+        }
+
+            .menu li { /*水平菜单*/
+                float: left;
+                list-style: none;
+                position: relative; /*把包含块移动li元素*/
+            }
+
+            .menu a {
+                display: block;
+                height: 32px;
+                width: 100px;
+                line-height: 32px;
+                background: #a9ea00;
+                color: #ff8040;
+                text-decoration: none;
+                text-align: center;
+                overflow: hidden; /*★★★★*/
+            }
+
+            .menu table {
+                border-collapse: collapse;
+            }
+
+        .auto-style1 {
+            width: 100%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+
+        .auto-style2 {
+            height: 22px;
+        }
+
+        .auto-style4 {
+            width: 33%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+
+        .auto-style5 {
+            width: 39%;
+            height: 90px;
+            border: 1px solid #8080C0;
+            background-color: #8080C0;
+        }
+    </style>
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <div>
+            <div class="div1">
+
+                <table class="auto-style1">
+                    <tr>
+                        <td class="auto-style5" style="font-size: 55px; font-weight: 900; font-style: italic">勤工助学管理系统</td>
+                        <td class="auto-style4">&nbsp;</td>
+                        <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp<%=Session["username"] %>
+                            &nbsp;&nbsp;
+                  <asp:Button ID="zhuxiao" class="btn btn-danger" data-loading-text="注销"
+                      type="button" runat="server" Text="注销" Style="font-size: large" OnClick="zhuxiao_Click" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="div23">
+                 
+                <div class="div2">
+                    
+
+
+                           
+
+
+                            <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" NodeIndent="15" ShowLines="True" Font-Bold="True" Font-Names="黑体" Font-Size="Large" Font-Strikeout="False" ForeColor="Black" Height="147px" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
+
+                                <LevelStyles>
+                                    <asp:TreeNodeStyle Font-Size="26px" />
+                                </LevelStyles>
+                                <Nodes>
+                                    <asp:TreeNode Text="考勤查询" Value="考勤查询" NavigateUrl="~/u_fmc/AttendanceQuery.aspx">
+                                    </asp:TreeNode>
+                                    <asp:TreeNode Text="用人单位管理" Value="用人单位管理">
+                                        <asp:TreeNode NavigateUrl="~/u_fmc/EmployerInfoMaintain.aspx" Text="用人单位信息管理" Value="用人单位信息管理"></asp:TreeNode>
+                                        <asp:TreeNode NavigateUrl="~/u_fmc/WorkInfoMaintain.aspx" Text="岗位信息管理" Value="岗位信息管理"></asp:TreeNode>
+                                    </asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/StuInfoMaintain.aspx" Text="学生信息管理" Value="学生信息管理"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/UserInfoMaintain.aspx" Text="用户管理" Value="用户管理"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/SysInit.aspx" Text="系统初始化" Value="系统初始化"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/DataBackRestore.aspx" Text="数据备份与恢复" Value="数据备份与恢复"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/AboutSys.aspx" Text="关于系统" Value="关于系统"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/Dismissal.aspx" Text="撤职" Value="撤职"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/CountSalary.aspx" Text="结算工资" Value="结算工资"></asp:TreeNode>
+                                </Nodes>
+                                <NodeStyle Font-Names="Tahoma" Font-Size="Small" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
+                                <ParentNodeStyle Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" ForeColor="#000066" />
+                                <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" BorderStyle="Double" />
+                            </asp:TreeView>
+                       
+                </div>
+                <div class="div3">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                      
+
+                          
+                       
+                                
+                    </asp:ContentPlaceHolder>
+                </div>
+                            
+            </div>
+    </form>
+</body>
+</html>
