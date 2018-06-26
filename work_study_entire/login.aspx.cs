@@ -14,7 +14,7 @@ public partial class login : System.Web.UI.Page
         //hello,liweiiii
         //hello cgc
         //hello cgc2
-        //liwei
+        //liwei2
     }
 
     protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
