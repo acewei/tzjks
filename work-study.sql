@@ -12,7 +12,7 @@
  Target Server Version : 14001000
  File Encoding         : 65001
 
- Date: 26/06/2018 10:34:44
+ Date: 27/06/2018 12:53:13
 */
 
 
@@ -527,7 +527,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[User]  VALUES (N'1511240143', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N'e1', N'e10adc3949ba59abbe56e057f20f883e', N'用人单位', NULL), (N's1', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N't1', N'e10adc3949ba59abbe56e057f20f883e', N'学工组', NULL), (N'z1', N'e10adc3949ba59abbe56e057f20f883e', N'资助中心', NULL)
+INSERT INTO [dbo].[User]  VALUES (N'1511240143', N'698d51a19d8a121ce581499d7b701668', N'学生', NULL), (N'e1', N'e10adc3949ba59abbe56e057f20f883e', N'用人单位', NULL), (N's1', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N't1', N'e10adc3949ba59abbe56e057f20f883e', N'学工组', NULL), (N'z1', N'e10adc3949ba59abbe56e057f20f883e', N'资助中心', NULL)
 GO
 
 COMMIT
@@ -924,6 +924,24 @@ END
 CLOSE stus
 DEALLOCATE stus
 UPDATE WorkCheck set IsSettle=1 WHERE IsFinishWC=1 and IsSettle is null and LEFT(PostId, 2)=@EmployerId
+END
+GO
+
+
+-- ----------------------------
+-- Triggers structure for table Apply
+-- ----------------------------
+CREATE TRIGGER [dbo].[applyandreview]
+ON [dbo].[Apply]
+WITH EXECUTE AS CALLER
+FOR INSERT, DELETE
+AS
+BEGIN
+  -- Type the SQL Here.
+	if((SELECT count(*) from inserted)>0)
+	INSERT into SHInfo VALUES((SELECT ApplyId from inserted),null,null,null)
+	if((SELECT count(*) from deleted)>0)
+	DELETE from SHInfo WHERE ApplyId=(SELECT ApplyId from inserted)
 END
 GO
 
