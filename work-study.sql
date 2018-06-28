@@ -1,4 +1,4 @@
-/*
+﻿/*
  Navicat Premium Data Transfer
 
  Source Server         : sqlserver_l
@@ -1266,3 +1266,4 @@ GO
 ALTER TABLE [dbo].[WorkReqTime] ADD CONSTRAINT [FK__WorkReqTime__TId__32AB8735] FOREIGN KEY ([TId]) REFERENCES [Time] ([TId]) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
+--cgc test
