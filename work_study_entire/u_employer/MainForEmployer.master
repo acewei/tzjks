@@ -151,6 +151,7 @@
                   <asp:TreeNode Text="申请审核" Value="申请审核" NavigateUrl="~/u_employer/ApplyReview.aspx"></asp:TreeNode>
                   <asp:TreeNode Text="工作安排" Value="工作安排" NavigateUrl="~/u_employer/JobArrange.aspx"></asp:TreeNode>
                   <asp:TreeNode Text="考勤管理" Value="考勤管理" NavigateUrl="~/u_employer/AttendanceMgr.aspx"></asp:TreeNode>
+                  <asp:TreeNode NavigateUrl="~/u_employer/JobManage.aspx" Text="岗位管理" Value="岗位管理"></asp:TreeNode>
               </Nodes>
               <NodeStyle Font-Names="Tahoma" Font-Size="8pt" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
               <ParentNodeStyle Font-Bold="False" />

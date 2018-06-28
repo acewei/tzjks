@@ -139,8 +139,8 @@
                                                         </asp:TableCell>
                                                         <asp:TableCell>
 
-                                                            <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-
+                                                            
+                                                            <asp:TextBox TextMode="Date" ID="t1" runat="server"></asp:TextBox>
                                                         </asp:TableCell>
                                                     </asp:TableRow>
                                                     <asp:TableRow>
@@ -149,7 +149,7 @@
                                                             </asp:Label>
                                                         </asp:TableCell>
                                                         <asp:TableCell>
-                                                            <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+                                                            <asp:TextBox TextMode="Date" ID="t2" runat="server"></asp:TextBox>
                                                         </asp:TableCell>
                                                     </asp:TableRow>
                                                 </asp:Table>

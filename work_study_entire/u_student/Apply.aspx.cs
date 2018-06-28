@@ -81,8 +81,9 @@ public partial class u_student_Apply : System.Web.UI.Page
 
     protected void Button2_Click(object sender, EventArgs e)
     {
+        note.Text = "提交成功！" + new Random().Next();
         string postid = GridView1.Rows[GridView1.SelectedIndex].Cells[0].Text;
-        //DBManager.Nonquery("insert into stufreetime values('1511240142','12','151124014212')");
+
         note.Text = "提交成功！";
         bool suitsex, suitgrade, suittime = false;
         GridView g3 = (GridView)DetailsView1.FindControl("GridView3");
@@ -99,7 +100,7 @@ public partial class u_student_Apply : System.Web.UI.Page
                 for (int j = 0; j < reqtime; j++)
                 {
 
-                    //g3.DataKeys[j].Value.ToString() == GridView2.DataKeys[i].Value.ToString()+"|";
+
                     if (g3.DataKeys[j].Value.ToString() == GridView2.DataKeys[i].Value.ToString())
                     {
                         fl++;
@@ -110,31 +111,35 @@ public partial class u_student_Apply : System.Web.UI.Page
         }
         if (fl >= 1) suittime = true;
         if (GridView1.Rows[GridView1.SelectedIndex].Cells[4].Text == DBManager.Query("select ssex from student where sid='" + Label1.Text + "'").Tables[0].Rows[0][0].ToString()) suitsex = true;
-        //if(DBManager.Query("select ssex from student where sid='" + Label1.Text + "'").Tables[0].Rows[0][0].ToString()=="true")
+
         if (suittime)
         {
-            if (DBManager.Query("select count(*) from apply,workinfo where apply.postid='" + postid + "' and apply.postid=workinfo.postid and applytime > applytimebe and applytime<applytimefi").Tables[0].Rows[0][0].ToString() =="0")
+            if (DBManager.Query("select count(*) from apply,workinfo where apply.postid='" + postid + "' and apply.postid=workinfo.postid and applytime > applytimebe and applytime<applytimefi").Tables[0].Rows[0][0].ToString() == "0")
             {
+                
                 for (int i = 0; i < alltime; i++)
                 {
                     if (((CheckBox)GridView2.Rows[i].Cells[4].FindControl("CheckBox1")).Checked)
-                    DBManager.Nonquery("insert into stufreetime(sfid,sid,tid) values('" + Label1.Text + GridView2.DataKeys[i].Value.ToString() + "','" + Label1.Text + "','" + GridView2.DataKeys[i].Value.ToString() + "')");
+                        DBManager.Nonquery("insert into stufreetime(sfid,sid,tid) values('" + Label1.Text + GridView2.DataKeys[i].Value.ToString() + "','" + Label1.Text + "','" + GridView2.DataKeys[i].Value.ToString() + "')");
 
                 }
-            DBManager.Nonquery("insert into apply values('" + Label1.Text + GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString() + DateTime.Now.ToString("yyyyMMdd") + "','" + applyreason.InnerText + "','待审核','" + DateTime.Now + "','" + Label1.Text + "','" + GridView1.Rows[GridView1.SelectedIndex].Cells[0].Text + "')");
-            //DBManager.Nonquery("insert into apply values('1511240142010120180613','dfgdgg','待审核','2018-06-13','1511240142','0101')"); + Label1.Text + GridView1.DataKeys[GridView1.SelectedIndex].Value
-            note.Text = "提交成功！" + new Random().Next();
+                DBManager.Nonquery("insert into apply values('" + Label1.Text + GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString() + DateTime.Now.ToString("yyyyMMdd") + "','" + applyreason.Text + "','待审核','" + DateTime.Now + "','" + Label1.Text + "','" + GridView1.Rows[GridView1.SelectedIndex].Cells[0].Text + "')");
+                note.Text = "申请成功!";
+                Timer1.Enabled = true;
             }
             else
             {
-                note.Text = "已经申请该岗位....." + new Random().Next();
+                note.Text = "已经申请该岗位.....";
+                Timer1.Enabled = true;
             }
+           
         }
         else
         {
-            note.Text = "提交失败....." + new Random().Next();
+            note.Text = "提交失败,时间不符合.....";
+            Timer1.Enabled = true;
         }
-        Timer1.Enabled = true;
+
     }
 
 

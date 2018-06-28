@@ -1,4 +1,4 @@
-/*
+﻿/*
  Navicat Premium Data Transfer
 
  Source Server         : sqlserver_l
@@ -12,7 +12,7 @@
  Target Server Version : 14001000
  File Encoding         : 65001
 
- Date: 26/06/2018 10:34:44
+ Date: 28/06/2018 17:54:40
 */
 
 
@@ -331,7 +331,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[SHInfo]  VALUES (N'1511240142010120180613', N'的风格    ', N'2018-06-18 21:19:27.840', N'不通过    ')
+INSERT INTO [dbo].[SHInfo]  VALUES (N'1511240142010120180613', N'的风格    ', N'2018-06-28 17:02:40.600', N'通过')
 GO
 
 COMMIT
@@ -420,7 +420,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[StuFreeTime]  VALUES (N'1511240142', N'11', N'151124014211'), (N'1511240142', N'12', N'151124014212'), (N'1511240142', N'23', N'151124014223'), (N'1511240142', N'33', N'151124014233')
+INSERT INTO [dbo].[StuFreeTime]  VALUES (N'1511240142', N'11', N'151124014211'), (N'1511240142', N'12', N'151124014212'), (N'1511240142', N'23', N'151124014223'), (N'1511240142', N'33', N'151124014233'), (N'1511240143', N'11', N'151124014311'), (N'1511240143', N'12', N'151124014312'), (N'1511240143', N'23', N'151124014323'), (N'1511240143', N'33', N'151124014333')
 GO
 
 COMMIT
@@ -627,13 +627,13 @@ CREATE TABLE [dbo].[WorkInfo] (
   [HourlyWage] decimal(8,2) NOT NULL,
   [GenderReq] char(2) COLLATE Chinese_PRC_CI_AS NULL,
   [BelongUnit] varchar(20) COLLATE Chinese_PRC_CI_AS NOT NULL,
-  [GradeReq] char(4) COLLATE Chinese_PRC_CI_AS NULL,
+  [GradeReq] varchar(20) COLLATE Chinese_PRC_CI_AS NULL,
   [LossForAbsence] decimal(8,2) NOT NULL,
   [JobDescription] varchar(100) COLLATE Chinese_PRC_CI_AS NULL,
   [ApplyTimeBe] date NOT NULL,
   [ApplyTimeFi] date NOT NULL,
   [PeoNumberDemand] int NOT NULL,
-  [IsConfirm] bit NULL
+  [IsConfirm] bit SPARSE NULL
 )
 GO
 
@@ -717,7 +717,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[WorkInfo]  VALUES (N'0101', N'洗碗', N'西苑', N'12.00', NULL, N'西苑', NULL, N'2.00', N'交换机的数据撒旦发射点发顺丰发反馈及时的反馈使得飞机开始即使对方开始加快分解', N'2018-05-30', N'2018-07-12', N'3', NULL), (N'0102', N'扫地', N'西苑', N'10.00', NULL, N'西苑', NULL, N'2.00', N'色发射点发射点大师傅打发士大夫发生', N'2018-06-18', N'2018-06-30', N'5', NULL)
+INSERT INTO [dbo].[WorkInfo]  VALUES (N'0101', N'洗碗', N'西苑', N'12.00', N'男', N'西苑', N'', N'2.00', N'开始加快分解', N'2018-06-02', N'2018-06-28', N'1', NULL)
 GO
 
 COMMIT
@@ -787,6 +787,41 @@ BEGIN
  	set @FinalPay=@TotalPay-@LossHour*(SELECT LossForAbsence FROM WorkInfo where PostId=@PostId)
  	INSERT into Salary VALUES(@sid+@PostId+CONVERT(varchar(100),@Payday,112),@SId,@PostId,(SELECT EmployerId from WorkInfo,Employer WHERE PostId=@PostId and BelongUnit=EmployerName),@RealTotalHour,convert(decimal(5,1),@RealTotalHour+@LossHour),@LossHour,@TotalPay,@FinalPay,@Payday)
 UPDATE WorkCheck set IsSettle=1 WHERE IsFinishWC=1 and IsSettle is null and SId=@SId
+END
+GO
+
+
+-- ----------------------------
+-- Procedure structure for addwork
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[addwork]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[addwork]
+GO
+
+CREATE PROCEDURE [dbo].[addwork]
+  @Post AS varchar(20) ,
+  @WorkPlace AS varchar(30),
+@HourlyWage As DECIMAL(8,2),
+@GenderReq as char(2),
+@BelongUnit as VARCHAR(20),
+@GradeReq as char(4),
+@LossForAbsence as DECIMAL(8,2),
+@JobDescription as VARCHAR(100),
+@ApplyTimeBe as date,
+@ApplyTimeFi as date,
+@PeoNumberDemand as int
+AS
+BEGIN
+	-- routine body goes here, e.g.
+	-- SELECT 'Navicat for SQL Server'
+	DECLARE @newid char(4),@newint int,@tem char(2)
+	set @newint= (SELECT top 1 right(PostId,2) from WorkInfo WHERE BelongUnit=@BelongUnit ORDER BY PostId DESC)+1
+	SELECT @newint as 'int'
+	if(@newint<10)set @tem='0'+CONVERT(char,@newint)
+	else set @tem=CONVERT(char(2),@newint)
+	set @newid=(SELECT EmployerId from Employer WHERE EmployerName=@BelongUnit)+@tem
+	select @tem 'tem'
+	insert into workinfo values(@newid,@post,@workplace,@hourlywage,@genderreq,@belongunit,@gradereq,@lossforabsence,@jobdescription,@applytimefi,@applytimefi,@peonumberdemand,null)
 END
 GO
 
@@ -924,6 +959,24 @@ END
 CLOSE stus
 DEALLOCATE stus
 UPDATE WorkCheck set IsSettle=1 WHERE IsFinishWC=1 and IsSettle is null and LEFT(PostId, 2)=@EmployerId
+END
+GO
+
+
+-- ----------------------------
+-- Triggers structure for table Apply
+-- ----------------------------
+CREATE TRIGGER [dbo].[applyandreview]
+ON [dbo].[Apply]
+WITH EXECUTE AS CALLER
+FOR INSERT, DELETE
+AS
+BEGIN
+  -- Type the SQL Here.
+	if((SELECT count(*) from inserted)>0)
+	INSERT into SHInfo VALUES((SELECT ApplyId from inserted),null,null,null)
+	if((SELECT count(*) from deleted)>0)
+	DELETE from SHInfo WHERE ApplyId=(SELECT ApplyId from inserted)
 END
 GO
 
@@ -1108,6 +1161,15 @@ GO
 
 
 -- ----------------------------
+-- Uniques structure for table WorkInfo
+-- ----------------------------
+ALTER TABLE [dbo].[WorkInfo] ADD CONSTRAINT [UQ__WorkInfo__A4DFCAAF66FAA572] UNIQUE NONCLUSTERED ([Post] ASC)
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
 -- Checks structure for table WorkInfo
 -- ----------------------------
 ALTER TABLE [dbo].[WorkInfo] ADD CONSTRAINT [SexCheck] CHECK ([GenderReq]='男' OR [GenderReq]='女')
@@ -1204,3 +1266,4 @@ GO
 ALTER TABLE [dbo].[WorkReqTime] ADD CONSTRAINT [FK__WorkReqTime__TId__32AB8735] FOREIGN KEY ([TId]) REFERENCES [Time] ([TId]) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
+--cgc test

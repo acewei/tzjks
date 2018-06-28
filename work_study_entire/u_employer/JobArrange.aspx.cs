@@ -9,7 +9,7 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
 {
     public string sd;
     string sid, postid, tid;
-    DateTime d1, d2;
+    string d1, d2;
     public static bool flag = false;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -63,8 +63,8 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
         sid = DBManager.Query("select sid from student where sname='" + DropDownList1.SelectedValue + "'").Tables[0].Rows[0][0].ToString();
         postid = DBManager.Query("select postid from workinfo where post='" + DropDownList2.SelectedValue + "' and belongunit='西苑'").Tables[0].Rows[0][0].ToString();
 
-        d1 = Calendar1.SelectedDate;
-        d2 = Calendar2.SelectedDate;
+        d1 = t1.Text;
+        d2 = t2.Text;
         int allar = Convert.ToInt32(DBManager.Query("select count(*) from stufreetime,workreqtime,workinfo,student,time where stufreetime.tid=time.tid and stufreetime.tid=workreqtime.tid and workreqtime.postid=workinfo.postid and stufreetime.sid=student.sid and student.sname='" + DropDownList1.SelectedValue + "' and workinfo.post='" + DropDownList2.SelectedValue + "' ").Tables[0].Rows[0][0].ToString());
         for (int i = 0; i < allar; i++)
 
