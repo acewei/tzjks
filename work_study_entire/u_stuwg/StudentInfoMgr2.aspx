@@ -21,7 +21,7 @@
         .auto-style8 {
             width: 318px;
         }
-        </style>
+    </style>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <fieldset style="width:300px;">
@@ -194,13 +194,12 @@
                  </fieldset>
             </ContentTemplate>
     </asp:UpdatePanel>
-						   
-						</div>
-						<div class="modal-footer" style="height:66px">
-							 <%--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary">保存</button>--%>
+						   <div class="modal-footer" style="height:66px">
                             <asp:Button ID="Button1" class="btn btn-primary" runat="server" Text="添加" OnClick="Button1_Click" />&nbsp
-                            <asp:Button ID="Button2" class="btn btn-default" runat="server" Text="取消" OnClick="Button2_Click" />
+                            <asp:Button ID="Button2" class="btn btn-default" runat="server" Text="关闭" OnClick="Button2_Click" />
+						   </div>
 						</div>
+						
 					</div>
 					
 				</div>
