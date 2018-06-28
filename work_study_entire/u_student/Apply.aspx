@@ -58,6 +58,27 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <br />
+        <asp:GridView ID="applystatus" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="applyid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <Columns>
+            <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
+            <asp:BoundField DataField="sname" HeaderText="学生姓名" />
+            <asp:BoundField DataField="post" HeaderText="申请岗位" />
+            <asp:TemplateField HeaderText="申请状态">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                        <asp:ListItem>通过</asp:ListItem>
+                        <asp:ListItem>不通过</asp:ListItem>
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("reviewresult") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="reviewtime" HeaderText="审核时间" />
+            <asp:BoundField DataField="reviewer" HeaderText="审核人" />
+            <asp:CommandField HeaderText="操作" ShowEditButton="True" />
+        </Columns>
+    </asp:GridView>
     </div>
 
     <div class="container">
@@ -84,25 +105,19 @@
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:Label ID="Label1" runat="server" Text="未获取" />
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                            <asp:TableRow>
+                                                </asp:TableCell></asp:TableRow><asp:TableRow>
                                                 <asp:TableCell>
                                                     <asp:Label ID="Label3" runat="server" Text="姓名：">
                                                     </asp:Label>
                                                 </asp:TableCell><asp:TableCell>
                                                     <asp:Label ID="Label10" runat="server" Text="未获取" />
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                            <asp:TableRow>
+                                                </asp:TableCell></asp:TableRow><asp:TableRow>
                                                 <asp:TableCell>
                                                     <asp:Label ID="aaa" runat="server" Text="岗位：">
                                                     </asp:Label>
                                                 </asp:TableCell><asp:TableCell>
                                                     <asp:Label ID="post" runat="server" Text="未获取" />
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                            <asp:TableRow>
+                                                </asp:TableCell></asp:TableRow><asp:TableRow>
                                                 <asp:TableCell>
                                                     <asp:Label ID="Label6" runat="server" Text="选择空闲时间：">
                                                     </asp:Label>
@@ -121,20 +136,11 @@
                                                             </asp:TemplateField>
                                                         </Columns>
                                                     </asp:GridView>
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                            <asp:TableRow>
+                                                </asp:TableCell></asp:TableRow><asp:TableRow>
                                                 <asp:TableCell>填写申请理由：</asp:TableCell><asp:TableCell>
-                                                    <textarea id="applyreason" rows="5" cols="20" runat="server">
-
-                                                    </textarea>
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                        </asp:Table>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                   
+                                                    <asp:TextBox TextMode="MultiLine" ID="applyreason" runat="server"></asp:TextBox>
+                                                </asp:TableCell></asp:TableRow></asp:Table></ContentTemplate></asp:UpdatePanel></div><asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
                                     <asp:Label ID="note" CssClass="label-danger" runat="server" Text="" />
 

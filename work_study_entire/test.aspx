@@ -28,6 +28,8 @@
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WSConnectionString %>" SelectCommand="SELECT * FROM [Apply]"></asp:SqlDataSource>
             <asp:CheckBox ID="CheckBox1" runat="server" />
             <asp:Label ID="Label1" runat="server"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine"></asp:TextBox>
         </div>
     </form>
 </body>
