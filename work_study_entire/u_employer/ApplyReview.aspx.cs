@@ -19,6 +19,8 @@ public partial class u_employer_ApplyReview : System.Web.UI.Page
         string applyid = GridView1.Rows[e.RowIndex].Cells[0].Text;
         string peo = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[5].Controls[0])).Text;
         string status = ((DropDownList)(GridView1.Rows[e.RowIndex].Cells[3].FindControl("DropDownList1"))).SelectedValue;
+        //Page.ClientScript.RegisterClientScriptBlock(GetType(),"sd","alert('"+applyid+"')",true);
+        //DBManager.Nonquery("delete shinfo");
         DBManager.Nonquery("update shinfo set reviewer='"+peo+"',reviewtime=getdate(),reviewresult='"+status+"' where applyid='"+applyid+"'");
         GridView1.EditIndex = -1;
         bindgrid();
