@@ -16,9 +16,9 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            DropDownList1.DataSource = DBManager.Query("select * from student");
+            DropDownList1.DataSource = DBManager.Query("select * from student,apply,shinfo where apply.applyid=shinfo.applyid and apply.sid=student.sid and shinfo.reviewresult='通过'");
             DropDownList1.DataBind();
-            DropDownList2.DataSource = DBManager.Query("select * from workinfo");
+            DropDownList2.DataSource = DBManager.Query("select * from workinfo,apply,shinfo,student where apply.applyid=shinfo.applyid and apply.sid=student.sid and apply.postid=workinfo.postid and student.sname='"+DropDownList1.SelectedValue+"'");
             DropDownList2.DataBind();
             GridView2.DataSource = DBManager.Query("select time.* from stufreetime,workreqtime,workinfo,student,time where stufreetime.tid=time.tid and stufreetime.tid=workreqtime.tid and workreqtime.postid=workinfo.postid and stufreetime.sid=student.sid and student.sname='" + DropDownList1.SelectedValue + "' and workinfo.post='" + DropDownList2.SelectedValue + "' ");
             GridView2.DataBind();

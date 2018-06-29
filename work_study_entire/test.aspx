@@ -16,20 +16,11 @@
                 <asp:ListItem>13</asp:ListItem>
                 <asp:ListItem>45</asp:ListItem>
             </asp:CheckBoxList>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ApplyId" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                <Columns>
-                    <asp:BoundField DataField="ApplyId" HeaderText="ApplyId" ReadOnly="True" SortExpression="ApplyId" />
-                    <asp:BoundField DataField="Reason" HeaderText="Reason" SortExpression="Reason" />
-                    <asp:BoundField DataField="ApplyTime" HeaderText="ApplyTime" SortExpression="ApplyTime" />
-                    <asp:BoundField DataField="SId" HeaderText="SId" SortExpression="SId" />
-                    <asp:BoundField DataField="PostId" HeaderText="PostId" SortExpression="PostId" />
-                </Columns>
-            </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WSConnectionString %>" SelectCommand="SELECT * FROM [Apply]"></asp:SqlDataSource>
-            <asp:CheckBox ID="CheckBox1" runat="server" />
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <asp:Label ID="Label1" runat="server"></asp:Label>
             <br />
-            <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <br />
         </div>
     </form>
 </body>

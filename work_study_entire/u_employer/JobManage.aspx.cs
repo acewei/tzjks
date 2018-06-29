@@ -14,6 +14,8 @@ public partial class u_employer_JobManage : System.Web.UI.Page
             Session["username"] = "t1";
             Session["userid"] = "用人单位";
             Session["remark"] = "西苑";
+            workreqtime.DataSource= DBManager.Query("select * from time");
+            workreqtime.DataBind();
             bindgrid();
         }
     }
@@ -36,6 +38,7 @@ public partial class u_employer_JobManage : System.Web.UI.Page
     {
         string postid = GridView1.DataKeys[e.RowIndex].Value.ToString();
         DBManager.Nonquery("delete from workinfo where postid='"+postid+"'");
+        DBManager.Nonquery("delete from workreqtime where postid='"+postid+"'");
         bindgrid();
     }
 
@@ -89,22 +92,36 @@ public partial class u_employer_JobManage : System.Web.UI.Page
         string hourwage = shixin.Text;
         string genderreq = genderreq1.SelectedValue;
 
+        int alltime = Convert.ToInt32(DBManager.Query("select count(*) from time").Tables[0].Rows[0][0].ToString());
         string loss = loss1.Text;
         string descri = description.Text;
         string peoneed = peonum.Text;
         string applybe = betime.Text;
         string applyfi = fitime.Text;
-        if (DBManager.Nonquery("exec addwork '" + post + "','" + workplace + "','" + hourwage + "','" + genderreq + "','" + Session["remark"] + "','" + gradereq + "'," +
-            "'" + loss + "','" + descri + "','" + applybe + "','" + applyfi + "','" + peoneed + "'") > 0)
+        string newpostid = DBManager.Query("SELECT dbo.newpostid('"+Session["remark"]+"')").Tables[0].Rows[0][0].ToString();
+        for (int i = 0; i < alltime; i++)
         {
-            note.Text = "添加成功！";
-            Timer1.Enabled = true;
-            bindgrid();
+            if (((CheckBox)workreqtime.Rows[i].Cells[4].FindControl("CheckBox1")).Checked) 
+                DBManager.Nonquery("insert into workreqtime(wrid,postid,tid) values('" + newpostid + workreqtime.DataKeys[i].Value.ToString() + "','" + newpostid + "','" + workreqtime.DataKeys[i].Value.ToString() + "')");
+
         }
-        else
+        try
         {
-            note.Text = "添加失败...";
-            Timer1.Enabled = true;
+            if (DBManager.Nonquery("exec addwork '" + post + "','" + workplace + "','" + hourwage + "','" + genderreq + "','" + Session["remark"] + "','" + gradereq + "'," +
+                "'" + loss + "','" + descri + "','" + applybe + "','" + applyfi + "','" + peoneed + "'") > 0)
+            {
+                note.Text = "添加成功！";
+                Timer1.Enabled = true;
+                bindgrid();
+            }
+            else
+            {
+                note.Text = "添加失败,岗位名不能重复...";
+                Timer1.Enabled = true;
+            }
+        }catch(Exception xc)
+        {
+            note.Text = xc.ToString();
         }
        
     }

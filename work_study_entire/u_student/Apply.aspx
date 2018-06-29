@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="auto-style6">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
-            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" CellPadding="4" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px">
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="PostId" HeaderText="岗位号" />
                 <asp:BoundField DataField="Post" HeaderText="岗位名" />
@@ -18,16 +18,15 @@
                 <asp:BoundField DataField="PeoNumberDemand" HeaderText="人数需求" />
                 <asp:CommandField ShowSelectButton="True" />
             </Columns>
-            <EditRowStyle BackColor="#999999" />
-            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-            <SelectedRowStyle BackColor="#E2DED6" BorderColor="#666699" BorderStyle="Double" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#E9E7E2" />
-            <SortedAscendingHeaderStyle BackColor="#506C8C" />
-            <SortedDescendingCellStyle BackColor="#FFFDF8" />
-            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE" />
+            <SelectedRowStyle BackColor="#CE5D5A" BorderColor="#666699" BorderStyle="Double" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
         详细描述：<br />
         <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" BorderStyle="Groove" Height="50px" Width="436px" DataKeyNames="postid">
@@ -58,27 +57,39 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <br />
-        <asp:GridView ID="applystatus" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="applyid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-        <Columns>
-            <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
-            <asp:BoundField DataField="sname" HeaderText="学生姓名" />
-            <asp:BoundField DataField="post" HeaderText="申请岗位" />
-            <asp:TemplateField HeaderText="申请状态">
-                <EditItemTemplate>
-                    <asp:DropDownList ID="DropDownList1" runat="server">
-                        <asp:ListItem>通过</asp:ListItem>
-                        <asp:ListItem>不通过</asp:ListItem>
-                    </asp:DropDownList>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("reviewresult") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:BoundField DataField="reviewtime" HeaderText="审核时间" />
-            <asp:BoundField DataField="reviewer" HeaderText="审核人" />
-            <asp:CommandField HeaderText="操作" ShowEditButton="True" />
-        </Columns>
-    </asp:GridView>
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
+
+                <asp:GridView ID="applystatus" runat="server" OnRowDeleting="applystatus_RowDeleting" AutoGenerateColumns="False" DataKeyNames="applyid">
+                    <Columns>
+                        <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
+                        <asp:BoundField DataField="post" HeaderText="申请岗位" />
+                        <asp:BoundField DataField="belongunit" HeaderText="所属单位" />
+                        <asp:BoundField DataField="applytime" HeaderText="申请时间" />
+                        <asp:TemplateField ItemStyle-ForeColor="Red" HeaderText="审核状态">
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="DropDownList1" runat="server">
+                                    <asp:ListItem>通过</asp:ListItem>
+                                    <asp:ListItem>不通过</asp:ListItem>
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("reviewresult") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle ForeColor="Red" />
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="reviewtime" HeaderText="审核时间" />
+                        <asp:BoundField DataField="reviewer" HeaderText="审核人" />
+                        <asp:TemplateField ShowHeader="False">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="取消申请" OnClientClick="return confirm('确认取消此申请？')"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 
     <div class="container">
@@ -129,7 +140,6 @@
                                                             <asp:BoundField DataField="endtime" HeaderText="结束时间" />
                                                             <asp:BoundField DataField="timelength" HeaderText="时长" />
                                                             <asp:TemplateField>
-
                                                                 <ItemTemplate>
                                                                     <asp:CheckBox ID="CheckBox1" runat="server" />
                                                                 </ItemTemplate>
@@ -138,7 +148,7 @@
                                                     </asp:GridView>
                                                 </asp:TableCell></asp:TableRow><asp:TableRow>
                                                 <asp:TableCell>填写申请理由：</asp:TableCell><asp:TableCell>
-                                                   
+
                                                     <asp:TextBox TextMode="MultiLine" ID="applyreason" runat="server"></asp:TextBox>
                                                 </asp:TableCell></asp:TableRow></asp:Table></ContentTemplate></asp:UpdatePanel></div><asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
@@ -172,5 +182,6 @@
             </div>
         </div>
     </div>
+   
 </asp:Content>
 

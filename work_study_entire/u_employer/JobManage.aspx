@@ -53,6 +53,7 @@
                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("jobdescription") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        
                         <asp:TemplateField HeaderText="人数需求">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox3" TextMode="Number" runat="server" Text='<%# Bind("peonumberdemand") %>'></asp:TextBox>
@@ -84,7 +85,8 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
+    <div>
+    </div>
     <div class="container">
 
         <div class="row clearfix">
@@ -169,10 +171,31 @@
                                             </asp:TableRow>
                                             <asp:TableRow>
                                                 <asp:TableCell>
-                                                    <asp:Label ID="Label5" runat="server" Text="人数要求："></asp:Label>
+                                                    <asp:Label ID="Label15" runat="server" Text="人数要求："></asp:Label>
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:TextBox TextMode="Number" ID="peonum" runat="server"></asp:TextBox>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell>
+                                                    <asp:Label ID="Label9" runat="server" Text="选择要求时间："></asp:Label>
+                                                </asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:GridView ID="workreqtime" runat="server" AutoGenerateColumns="False" DataKeyNames="tid">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="whatday" HeaderText="星期" />
+                                                            <asp:BoundField DataField="starttime" HeaderText="开始时间" />
+                                                            <asp:BoundField DataField="endtime" HeaderText="结束时间" />
+                                                            <asp:BoundField DataField="timelength" HeaderText="时长" />
+                                                            <asp:TemplateField>
+
+                                                                <ItemTemplate>
+                                                                    <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow>

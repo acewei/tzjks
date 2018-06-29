@@ -13,7 +13,7 @@ using System.Text;
 
 public partial class StudentPS : System.Web.UI.Page
 {
-    public static DateTime a;
+    
    
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,23 +27,9 @@ public partial class StudentPS : System.Web.UI.Page
     
     {
         
-        GridView1.DataSource = DBManager.Query("select Salary.*,WorkInfo.* from Salary,WorkInfo where Salary.PostId=WorkInfo.PostId and salary.sid='" + Session["username"].ToString() + "' and datepart(yyyy,payday)='" + a.Year+"' and datepart(m,payday)='"+a.Month+"'");
+        GridView1.DataSource = DBManager.Query("select Salary.*,WorkInfo.* from Salary,WorkInfo where Salary.PostId=WorkInfo.PostId and salary.sid='" + Session["username"].ToString() + "' and payday>'"+TextBox1.Text+"' and payday<'"+TextBox2.Text+"'");
         GridView1.DataBind();
     }
    
-   
-    
-   
-
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        Calendar1.Visible = true;
-    }
-
-    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-    {
-        TextBox1.Text = Calendar1.SelectedDate.ToString();
-        a = Calendar1.SelectedDate;
-        Calendar1.Visible = false;
-    }
+  
 }

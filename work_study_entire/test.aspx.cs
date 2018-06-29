@@ -31,4 +31,9 @@ public partial class test : System.Web.UI.Page
     {
 
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Label1.Text = DBManager.Query("SELECT dbo.newpostid('西苑')").Tables[0].Rows[0][0].ToString();
+    }
 }
