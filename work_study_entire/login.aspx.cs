@@ -28,6 +28,7 @@ public partial class login : System.Web.UI.Page
             {
                 Session["username"] = dr.GetString(0);//Login1.UserName.ToString();
                 Session["userid"] = dr.GetString(2);
+                if(Session["userid"].ToString()=="学工组"||Session["userid"].ToString()=="用人单位")
                 Session["remark"] = dr.GetString(3);
                 e.Authenticated = true;//通过验证 
                 if (Session["userid"].ToString() == "学生") Response.Redirect("~/u_student/Apply.aspx");

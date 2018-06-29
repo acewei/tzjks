@@ -130,7 +130,7 @@
               <td class="auto-style4">
                   &nbsp;</td>
               <td class="auto-style2">
-                  &nbsp;&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp<%=Session["username"] %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp<%=Session["username"] %>&nbsp<%=Session["remark"] %>
                   <asp:Button ID="zhuxiao" class="btn btn-danger"  data-loading-text="注销"
    	               type="button" runat="server" Text="注销" OnClick="zhuxiao_Click" /> 
               </td>

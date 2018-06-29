@@ -14,7 +14,7 @@
             <ContentTemplate>
 
 
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="postid" HeaderText="岗位编号" />
                         <asp:BoundField DataField="post" HeaderText="岗位名" />
@@ -53,7 +53,7 @@
                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("jobdescription") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        
+
                         <asp:TemplateField HeaderText="人数需求">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox3" TextMode="Number" runat="server" Text='<%# Bind("peonumberdemand") %>'></asp:TextBox>
@@ -80,12 +80,42 @@
                         </asp:TemplateField>
                         <asp:CommandField ShowEditButton="True" />
                         <asp:CommandField ShowDeleteButton="True" />
+                        <asp:CommandField ShowSelectButton="True" />
                     </Columns>
                 </asp:GridView>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+        <ContentTemplate>
+
+
+            <asp:Label ID="warn" runat="server" Text="Label"></asp:Label>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <div>
+        查看时间要求详情：
+        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+            <ContentTemplate>
+
+                <asp:GridView ID="workreqtimev" runat="server" AutoGenerateColumns="False" DataKeyNames="tid">
+                    <Columns>
+                        <asp:BoundField DataField="tid" HeaderText="时间编号" />
+                        <asp:BoundField DataField="whatday" HeaderText="星期" />
+                        <asp:BoundField DataField="starttime" HeaderText="开始时间" />
+                        <asp:BoundField DataField="endtime" HeaderText="结束时间" />
+                        <asp:BoundField DataField="timelength" HeaderText="时长" />
+                        <asp:TemplateField>
+                            
+                            <ItemTemplate>
+                                <asp:CheckBox Visible="false" ID="checktime" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
     <div class="container">
 
