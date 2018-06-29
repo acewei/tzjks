@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="MainForFMC.master" AutoEventWireup="true" CodeFile="UserInfoMaintain.aspx.cs" Inherits="UserInfoMaintain" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/u_fmc/MainForFMC.master" AutoEventWireup="true" CodeFile="Time.aspx.cs" Inherits="u_fmc_Time" %>
 
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <style>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <style>
         #left,#right,#denglu,#two
         {
             background-color:#ffffff;
@@ -26,12 +25,12 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <fieldset style="width:300px;">
-            <legend class="text-center text-primary">岗位信息管理</legend>
+            <legend class="text-center text-primary">时间设置管理</legend>
 
     <div id="first" class="auto-style7"> 
 
         <asp:Label ID="Label_pleaseinput" runat="server" Text="请输入搜索内容："></asp:Label>
-        <asp:TextBox ID="TextBoxsearch" runat="server" Width="88px"></asp:TextBox>
+        <asp:TextBox ID="TextBoxsearch" runat="server" Width="88px" TextMode="DateTime"></asp:TextBox>
         <asp:Button ID="Buttonsearch" class="btn btn-default"  data-loading-text="搜索"
    	               type="button" runat="server" Text="搜索" OnClick="Buttonsearch_Click" />
         <p></p>
@@ -41,24 +40,22 @@
             OnRowDeleting="GridView1_RowDeleting" 
             OnRowEditing="GridView1_RowEditing" 
             OnRowUpdating="GridView1_RowUpdating" 
-            DataKeyNames="UserName" 
+            DataKeyNames="TId" 
             AllowPaging="True" 
             OnPageIndexChanging="GridView1_PageIndexChanging" 
             AllowSorting="True" 
             OnRowDataBound="GridView1_RowDataBound"
-            CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None" OnRowCommand="GridView1_RowCommand" 
+            CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None"
             >
    
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="UserName" HeaderText="用户名" ReadOnly="True" />
-                <asp:BoundField DataField="Password" HeaderText="密码" ReadOnly="True" />
-                <asp:BoundField DataField="UserId" HeaderText="用户类型" />
-                <asp:BoundField DataField="Remark" HeaderText="备注" />
+                <asp:BoundField DataField="TId" HeaderText="编号" ReadOnly="True" />
+                <asp:BoundField DataField="WhatDay" HeaderText="周几" />
+                <asp:BoundField DataField="StartTime" HeaderText="开始时间" />
+                <asp:BoundField DataField="EndTime" HeaderText="结束时间" />
+                <asp:BoundField DataField="TimeLength" HeaderText="时长" />
                 <asp:TemplateField ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:Button ID="ResetButton" runat="server" CausesValidation="false"  CommandName="reset" Text="重置密码" />
-                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField InsertVisible="false" ShowEditButton="True" />
                 <asp:TemplateField HeaderText="操作" ShowHeader="False">
@@ -121,13 +118,13 @@
     <div class="container" style="margin-left:0px;">
 	<div class="row clearfix">
 		<div class="col-md-12 column" >
-			<button id="modal-874515"  href="#modal-container-874515" role="button" type="button" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span>添加用户</button>
+			<button id="modal-874515"  href="#modal-container-874515" role="button" type="button" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-time"></span>添加新时间</button>
 			<div class="modal fade" id="modal-container-874515" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content" style="height:650px;width:450px;text-align:center;">
 						<div class="modal-header" style="height:50px">
                             <h4 class="modal-title" id="myModalLabel">
-								添加用户
+								添加时间
 							</h4>
 							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
@@ -139,24 +136,29 @@
     
      <table style="width: 400px; height: 350px;background-color:lavenderblush;margin:0px auto;">
      <tr>
-     <td style="width: 400px; text-align: right"> 用户名：</td>
+     <td style="width: 400px; text-align: right"> 时间编号：</td>
      <td class="auto-style6"> 
      <asp:TextBox ID="TextBox1" runat="server" Width="230px"></asp:TextBox></td> 
      </tr>
      <tr>
-     <td style="width: 400px; text-align: right"> 用户密码：</td>
+     <td style="width: 400px; text-align: right"> 周几：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox2" runat="server" Width="230px" ReadOnly="true" Text="123456"></asp:TextBox></td> 
+     <asp:TextBox ID="TextBox2" runat="server" Width="230px"></asp:TextBox></td> 
      </tr>
      <tr>
-     <td style="width: 400px; text-align: right">  用户类型：</td>
+     <td style="width: 400px; text-align: right">  开始时间：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox3" runat="server" Width="230px"></asp:TextBox></td> 
+     <asp:TextBox ID="TextBox3" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td> 
      </tr>
      <tr>
-     <td style="width: 400px; text-align: right"> 备注：</td>
+     <td style="width: 400px; text-align: right"> 结束时间：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox4" runat="server" Width="230px" TextMode="MultiLine"></asp:TextBox></td>  
+     <asp:TextBox ID="TextBox4" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td>  
+     </tr>
+     <tr>
+     <td style="width: 400px; text-align: right"> 时长：</td>
+     <td class="auto-style6">
+     <asp:TextBox ID="TextBox5" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td>  
      </tr>
 
      <tr>

@@ -32,7 +32,7 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
         DataSet ds = new DataSet();
         using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
         {
-            SqlDataAdapter sqld = new SqlDataAdapter("select PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand from WorkInfo", sqlconn);
+            SqlDataAdapter sqld = new SqlDataAdapter("select PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand,IsConfirm from WorkInfo", sqlconn);
             sqld.Fill(ds, "tabWorkInfo");
         }
         GridView1.DataSource = ds.Tables["tabWorkInfo"].DefaultView;
@@ -77,7 +77,7 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
         sqlconn.Open();
         SqlCommand Comm = new SqlCommand();
         Comm.Connection = sqlconn;
-        Comm.CommandText = "update WorkInfo set Post=@Post, WorkPlace=@WorkPlace,HourlyWage=@HourlyWage,GenderReq=@GenderReq,BelongUnit=@BelongUnit,GradeReq=@GradeReq,LossForAbsence=@LossForAbsence,JobDescription=@JobDescription,PeoNumberDemand=@PeoNumberDemand where PostId=@PostId";
+        Comm.CommandText = "update WorkInfo set Post=@Post, WorkPlace=@WorkPlace,HourlyWage=@HourlyWage,GenderReq=@GenderReq,BelongUnit=@BelongUnit,GradeReq=@GradeReq,LossForAbsence=@LossForAbsence,JobDescription=@JobDescription,PeoNumberDemand=@PeoNumberDemand,IsConfirm=@IsConfirm where PostId=@PostId";
         Comm.Parameters.AddWithValue("@PostId", GridView1.DataKeys[e.RowIndex].Value.ToString());
         Comm.Parameters.AddWithValue("@Post", ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text);
         Comm.Parameters.AddWithValue("@WorkPlace", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
@@ -88,6 +88,8 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
         Comm.Parameters.AddWithValue("@LossForAbsence", ((TextBox)GridView1.Rows[e.RowIndex].Cells[7].Controls[0]).Text);
         Comm.Parameters.AddWithValue("@JobDescription", ((TextBox)GridView1.Rows[e.RowIndex].Cells[8].Controls[0]).Text);
         Comm.Parameters.AddWithValue("@PeoNumberDemand", ((TextBox)GridView1.Rows[e.RowIndex].Cells[9].Controls[0]).Text);
+        Comm.Parameters.AddWithValue("@IsConfirm", ((TextBox)GridView1.Rows[e.RowIndex].Cells[10].Controls[0]).Text);
+
         Comm.ExecuteNonQuery();
         sqlconn.Close();
         sqlconn = null;

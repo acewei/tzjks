@@ -65,6 +65,7 @@
                 <asp:BoundField DataField="ApplyTimeBe" HeaderText="申请开始时间" />
                 <asp:BoundField DataField="ApplyTimeFi" HeaderText="申请结束时间" />
                 <asp:BoundField DataField="PeoNumberDemand" HeaderText="招人数" />
+                <asp:CheckBoxField DataField="IsConfirm" HeaderText="确认发布" />
                 <asp:CommandField InsertVisible="false" ShowEditButton="True" />
                 <asp:TemplateField HeaderText="操作" ShowHeader="False">
                     <ItemTemplate>

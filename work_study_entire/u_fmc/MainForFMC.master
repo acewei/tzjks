@@ -164,6 +164,7 @@
                                     <asp:TreeNode NavigateUrl="~/u_fmc/AboutSys.aspx" Text="关于系统" Value="关于系统"></asp:TreeNode>
                                     <asp:TreeNode NavigateUrl="~/u_fmc/Dismissal.aspx" Text="撤职" Value="撤职"></asp:TreeNode>
                                     <asp:TreeNode NavigateUrl="~/u_fmc/CountSalary.aspx" Text="结算工资" Value="结算工资"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/Time.aspx" Text="时间管理" Value="时间管理"></asp:TreeNode>
                                 </Nodes>
                                 <NodeStyle Font-Names="Tahoma" Font-Size="Small" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
                                 <ParentNodeStyle Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" ForeColor="#000066" />

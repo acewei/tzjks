@@ -71,7 +71,7 @@ public partial class EmployerMaintain : System.Web.UI.Page
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; ;
+        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; 
         SqlConnection sqlconn = new SqlConnection(sqlconnstr);
         //提交行修改
         sqlconn.Open();

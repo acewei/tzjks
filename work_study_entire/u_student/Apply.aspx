@@ -58,7 +58,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <br />
-        <asp:GridView ID="applystatus" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="applyid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <%--<asp:GridView ID="applystatus" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="applyid" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
         <Columns>
             <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
             <asp:BoundField DataField="sname" HeaderText="学生姓名" />
@@ -78,7 +78,7 @@
             <asp:BoundField DataField="reviewer" HeaderText="审核人" />
             <asp:CommandField HeaderText="操作" ShowEditButton="True" />
         </Columns>
-    </asp:GridView>
+    </asp:GridView>--%>
     </div>
 
     <div class="container">

@@ -17,7 +17,7 @@ using System.Data.OleDb;
 using System.Reflection;
 using System.Security.Cryptography;
 
-public partial class UserInfoMaintain : System.Web.UI.Page
+public partial class u_fmc_Time : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -33,10 +33,10 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         DataSet ds = new DataSet();
         using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
         {
-            SqlDataAdapter sqld = new SqlDataAdapter("select UserName,Password,UserId,Remark from [User]", sqlconn);
-            sqld.Fill(ds, "tabUser");
+            SqlDataAdapter sqld = new SqlDataAdapter("select TId,WhatDay,StartTime,EndTime,TimeLength from Time", sqlconn);
+            sqld.Fill(ds, "tabTime");
         }
-        GridView1.DataSource = ds.Tables["tabUser"].DefaultView;
+        GridView1.DataSource = ds.Tables["tabTime"].DefaultView;
         GridView1.DataBind();
     }
 
@@ -53,7 +53,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         SqlConnection sqlconn = new SqlConnection(sqlconnstr);
         sqlconn.Open();
         //删除行处理
-        String sql = "delete from [User] where UserName='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
+        String sql = "delete from [User] where TId='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
         SqlCommand Comm = new SqlCommand(sql, sqlconn);
         Comm.ExecuteNonQuery();
         sqlconn.Close();
@@ -61,7 +61,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         Comm = null;
         GridView1.EditIndex = -1;
         bindgrid();
-        
+
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -79,10 +79,12 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         sqlconn.Open();
         SqlCommand Comm = new SqlCommand();
         Comm.Connection = sqlconn;
-        Comm.CommandText = "update [User] set UserId=@UserId, Remark=@Remark where UserName=@UserName";
-        Comm.Parameters.AddWithValue("@UserName", GridView1.DataKeys[e.RowIndex].Value.ToString());
-        Comm.Parameters.AddWithValue("@UserId", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@Remark", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text);
+        Comm.CommandText = "update Time set TId=@TId, WhatDay=@WhatDay,StartTime=@StartTime,EndTime=@EndTime,TimeLength=TimeLength where TId=@TId";
+        Comm.Parameters.AddWithValue("@TId", GridView1.DataKeys[e.RowIndex].Value.ToString());
+        Comm.Parameters.AddWithValue("@WhatDay", ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text);
+        Comm.Parameters.AddWithValue("@StartTime", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
+        Comm.Parameters.AddWithValue("@EndTime", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text);
+        Comm.Parameters.AddWithValue("@TimeLength", ((TextBox)GridView1.Rows[e.RowIndex].Cells[4].Controls[0]).Text);
         Comm.ExecuteNonQuery();
         sqlconn.Close();
         sqlconn = null;
@@ -100,11 +102,12 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         SqlCommand sqlcommand = new SqlCommand();
         sqlcommand.Connection = sqlconn;
         //把SQL语句赋给Command对象
-        sqlcommand.CommandText = "insert into [User](UserName,Password,UserId,Remark)values (@UserName,@Password,@UserId,@Remark)";
-        sqlcommand.Parameters.AddWithValue("@UserName", TextBox1.Text);
-        sqlcommand.Parameters.AddWithValue("@Password", TextBox2.Text);
-        sqlcommand.Parameters.AddWithValue("@UserId", TextBox3.Text);
-        sqlcommand.Parameters.AddWithValue("@Remark", TextBox4.Text);
+        sqlcommand.CommandText = "insert into Time(TId,WhatDay,StartTime,EndTime,TimeLength)values (@TId,@WhatDay,@StartTime,@EndTime,@TimeLength)";
+        sqlcommand.Parameters.AddWithValue("@TId", TextBox1.Text);
+        sqlcommand.Parameters.AddWithValue("@WhatDay", TextBox2.Text);
+        sqlcommand.Parameters.AddWithValue("@StartTime", TextBox3.Text);
+        sqlcommand.Parameters.AddWithValue("@EndTime", TextBox4.Text);
+        sqlcommand.Parameters.AddWithValue("@TimeLength", TextBox4.Text);
         try
         {
             //打开连接
@@ -116,6 +119,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
             TextBox2.Text = String.Empty;
             TextBox3.Text = String.Empty;
             TextBox4.Text = String.Empty;
+            TextBox5.Text = String.Empty;
         }
         catch (Exception ex)
         {
@@ -138,6 +142,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         TextBox2.Text = String.Empty;
         TextBox3.Text = String.Empty;
         TextBox4.Text = String.Empty;
+        TextBox5.Text = String.Empty;
     }
 
     /// <summary>
@@ -361,49 +366,12 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         string strTemp = TextBoxsearch.Text;  //需要查寻的数据，从TextBox中读取 
         using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
         {
-            SqlDataAdapter sqld = new SqlDataAdapter("SELECT * FROM [User] WHERE (( UserName like '%" + TextBoxsearch.Text.ToString() + "%') or (UserId like '%" + TextBoxsearch.Text.ToString() + "%')) Order by UserName Desc", sqlconn);
-            sqld.Fill(ds, "tabUser");
+            SqlDataAdapter sqld = new SqlDataAdapter("SELECT * FROM Time WHERE (( TId like '%" + TextBoxsearch.Text.ToString() + "%') or (WhatDay like '%" + TextBoxsearch.Text.ToString() + "%')) Order by TId Desc", sqlconn);
+            sqld.Fill(ds, "tabTime");
         }
-        GridView1.DataSource = ds.Tables["tabUser"].DefaultView;
+        GridView1.DataSource = ds.Tables["tabTime"].DefaultView;
         GridView1.DataBind();
 
     }
 
-
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        if(e.CommandName == "reset")
-        {
-            //int row = ((GridViewRow)((Button)e.CommandSource).NamingContainer).RowIndex;
-            //string va = GridView1.DataKeys[row].Value.ToString();
-            Page.ClientScript.RegisterClientScriptBlock(GetType(), "asd", "alert('sdfsdffg')", true);
-            //  string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-            //SqlConnection connection = new SqlConnection(sqlconnstr);
-            //connection.Open();
-            //SqlCommand command = connection.CreateCommand();
-            //command.CommandText = "Update [User] set Password= substring(sys.fn_sqlvarbasetostr(HashBytes('MD5','123456')),3,32) where UserName='va'";
-            //int i = command.ExecuteNonQuery();
-            //connection.Close();
-            //this.bindgrid();
-        }
-        
-    }
-
-    //protected void ResetButton_Command(object sender, CommandEventArgs e)
-    //{
-    //    if(e.CommandName=="reset")
-    //    {
-    //        int row = ((GridViewRow)((Button)e.CommandSource).NamingContainer).RowIndex;
-    //        string va = GridView1.DataKeys[row].Value.ToString();
-    //        //Page.ClientScript.RegisterClientScriptBlock(GetType(), "asd", "alert('sdfsdffg')", true);
-    //        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-    //        SqlConnection connection = new SqlConnection(sqlconnstr);
-    //        connection.Open();
-    //        SqlCommand command = connection.CreateCommand();
-    //        command.CommandText = "Update [User] set Password= substring(sys.fn_sqlvarbasetostr(HashBytes('MD5','123456')),3,32) where UserName='va'";
-    //        int i = command.ExecuteNonQuery();
-    //        connection.Close();
-    //        this.bindgrid();
-    //    }
-    //}
 }
