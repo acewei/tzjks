@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 public partial class u_employer_JobArrange : System.Web.UI.Page
 {
     public string sd;
-    string sid, postid, tid;
+    string sid, postid;
     string d1, d2;
     public static bool flag = false;
     protected void Page_Load(object sender, EventArgs e)
