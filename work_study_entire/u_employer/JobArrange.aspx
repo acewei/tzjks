@@ -16,8 +16,8 @@
         条记录
            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                <ContentTemplate>
-                   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="20" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting">
-                       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="Vertical" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="20" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px">
+                       <AlternatingRowStyle BackColor="White" />
 
                        <Columns>
                            <asp:BoundField DataField="scid" HeaderText="安排号" ReadOnly="True" />
@@ -57,17 +57,16 @@
                            </asp:TemplateField>
 
                        </Columns>
-                       <EditRowStyle BackColor="#999999" />
-                       <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                       <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                       <FooterStyle BackColor="#CCCC99" />
+                       <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
                        <PagerSettings FirstPageText="第一页" LastPageText="最后一页" NextPageText="下一页" PreviousPageText="上一页" />
-                       <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" Font-Size="Larger" />
-                       <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                       <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                       <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                       <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                       <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" Font-Size="Larger" />
+                       <RowStyle BackColor="#F7F7DE" />
+                       <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                       <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                       <SortedAscendingHeaderStyle BackColor="#848384" />
+                       <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                       <SortedDescendingHeaderStyle BackColor="#575357" />
                    </asp:GridView>
                </ContentTemplate>
            </asp:UpdatePanel>

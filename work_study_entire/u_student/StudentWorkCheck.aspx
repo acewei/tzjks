@@ -27,25 +27,13 @@
         </p>
               
                 <div style="float: none; clear: right">
-                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                    时间:<asp:Label ID="Label2" runat="server" Text="选择日期"></asp:Label>
-                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/日历.png" OnClick="ImageButton1_Click" />
-                    &nbsp;到&nbsp;<asp:Label ID="Label3" runat="server" Text="选择日期"></asp:Label>
-                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/日历.png" OnClick="ImageButton2_Click" />
-                    &nbsp;
+                   
+                    <asp:TextBox ID="TextBox1" TextMode="Date" runat="server"></asp:TextBox>
+                   
+                    &nbsp;到&nbsp;
+                     <asp:TextBox ID="TextBox2" TextMode="Date" runat="server"></asp:TextBox>
              
     <asp:Button ID="Button1" runat="server" Text="查询" OnClick="Button1_Click" />
-                    &nbsp;
-                          </ContentTemplate>
-        </asp:UpdatePanel>      
-   <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-            <ContentTemplate>
-          <div style="float: right; margin-right: 60%;position:absolute;z-index:333">
-              <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged" Visible="False"></asp:Calendar>
-          </div>
-                   </ContentTemplate>
-        </asp:UpdatePanel>
                 </div>
 
             &nbsp;
