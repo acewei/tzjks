@@ -10,7 +10,7 @@ public partial class login : System.Web.UI.Page
     RadioButtonList rbl = null;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //master
+        //turn to
     }
 
     protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
