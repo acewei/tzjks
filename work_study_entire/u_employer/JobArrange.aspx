@@ -70,7 +70,7 @@
                    </asp:GridView>
                </ContentTemplate>
            </asp:UpdatePanel>
-
+    <asp:Button ID="Button2" OnClick="Button2_Click" runat="server" Text="导出工作安排表" />
     </div>    
     
     

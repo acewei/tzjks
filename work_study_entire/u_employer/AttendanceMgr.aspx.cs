@@ -7,8 +7,6 @@ using System.Web.UI;
 
 public partial class _Default : System.Web.UI.Page
 {
-    public static string Caluser = "";
-    public static DateTime a, b;
     public static bool flag =false ;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -116,50 +114,84 @@ public partial class _Default : System.Web.UI.Page
       
     }
 
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        Calendar1.Visible = true;
-        Caluser = ImageButton1.ID;
-
-    }
-
-    protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
-    {
-        Calendar1.Visible = true;
-        Caluser = ImageButton2.ID;
-
-    }
-
-    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-    {
-
-        if (Caluser == ImageButton1.ID)
-        {
-
-            Label2.Text = Calendar1.SelectedDate.ToString();
-            a = Calendar1.SelectedDate;
-        }
-        else if (Caluser == ImageButton2.ID)
-        {
-            Label3.Text = Calendar1.SelectedDate.ToString();
-            b = Calendar1.SelectedDate;
-        }
-        Calendar1.Visible = false;
-        Calendar1.SelectedDate = DateTime.Now;
-        //Page.ClientScript.RegisterClientScriptBlock(GetType(),"asa","alert('"+Label2.Text+"')",true);
-    }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
         string sql = "select * from WorkCheck,WorkInfo,Student where WorkCheck.Postid=WorkInfo.postid and WorkCheck.SId=Student.SId and " +
-            "WorkCheck.isfinishwc=1 and detaildate>='" + a + "' and detaildate<='" + b + "' order by detaildate";
-        //Response.Write("sadsad"+new Random().Next());
-        //GridView2.Visible = !GridView2.Visible;
-        //Page.ClientScript.RegisterClientScriptBlock(GetType(), "asa", "alert('" + Label2.Text + "')", true);
+            "WorkCheck.isfinishwc=1 and detaildate>='" + t1.Text + "' and detaildate<='" + t2.Text + "' order by detaildate";
+        
         GridView1.DataSource = DBManager.Query(sql);
-        //GridView2.DataSource = DBManager.Query("select Student.SId,WorkInfo.Post,WorkCheck.IsAttend,WorkCheck.IsSettle,WorkCheck.DetailDate from WorkCheck,WorkInfo,Student where WorkCheck.Postid=WorkInfo.postid and WorkCheck.SId=Student.SId and " +
-        //    "WorkCheck.isfinishwc=1 and sid='1511240145'");
+       
         GridView1.DataBind();
-        //DBManager.Nonquery("insert into stufreetime values('1511240142','33','151124014233')");
+       
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        GridView1.AllowPaging = false;
+        GridView1.ShowFooter = false;
+
+        //bindgrid();
+        GridView1.DataSource = DBManager.Query("select * from workcheck where isfinishwc is null order by detaildate,tid");
+        GridView1.DataBind();
+        Response.Clear();
+        Response.Buffer = true;
+        Response.Charset = "utf-8";
+        Response.AppendHeader("Content-Disposition", "attachment;filename=" + System.Web.HttpUtility.UrlEncode("导出" + System.DateTime.Now.Date.ToString("yyyyMMdd")) + ".xls");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("utf-8");//设置输出流为简体中文
+
+        Response.ContentType = "application/ms-excel";//设置输出文件类型为excel文件。 
+        this.EnableViewState = false;
+        System.Globalization.CultureInfo myCItrad = new System.Globalization.CultureInfo("ZH-CN", true);
+        System.IO.StringWriter oStringWriter = new System.IO.StringWriter(myCItrad);
+        System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
+
+        ClearControls(GridView1);
+        this.GridView1.RenderControl(oHtmlTextWriter);
+        Response.Write(oStringWriter.ToString());
+        Response.End();
+
+        //还原分页显示
+        GridView1.AllowPaging = true;
+        GridView1.ShowFooter = true;
+        bindgrid();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        // Confirms that an HtmlForm control is rendered for
+    }
+
+    private void ClearControls(Control control)
+    {
+        for (int i = control.Controls.Count - 1; i >= 0; i--)
+        {
+            ClearControls(control.Controls[i]);
+        }
+
+        if (!(control is TableCell))
+        {
+            if (control.GetType().GetProperty("SelectedItem") != null)
+            {
+                LiteralControl literal = new LiteralControl();
+                control.Parent.Controls.Add(literal);
+                try
+                {
+                    literal.Text = (string)control.GetType().GetProperty("SelectedItem").GetValue(control, null);
+                }
+                catch
+                {
+                }
+                control.Parent.Controls.Remove(control);
+            }
+            else if (control.GetType().GetProperty("Text") != null)
+            {
+                LiteralControl literal = new LiteralControl();
+                control.Parent.Controls.Add(literal);
+                literal.Text = (string)control.GetType().GetProperty("Text").GetValue(control, null);
+                control.Parent.Controls.Remove(control);
+            }
+        }
+        return;
     }
 }

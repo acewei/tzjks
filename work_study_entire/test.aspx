@@ -10,16 +10,25 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged" OnTextChanged="CheckBoxList1_TextChanged" RepeatDirection="Horizontal">
-                <asp:ListItem>11</asp:ListItem>
-                <asp:ListItem>12</asp:ListItem>
-                <asp:ListItem>13</asp:ListItem>
-                <asp:ListItem>45</asp:ListItem>
-            </asp:CheckBoxList>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <asp:Label ID="Label1" Text="afafsdf" runat="server"></asp:Label>
             <br />
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="sid" OnRowCommand="GridView1_RowCommand">
+                <Columns>
+                    <asp:BoundField DataField="sid" HeaderText="fsf" />
+                    <asp:BoundField DataField="sname" HeaderText="esfseg" />
+                    <asp:BoundField DataField="ssex" HeaderText="sgegs" />
+                    <asp:TemplateField ShowHeader="False">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" CommandName="xs" Text="按钮"></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem>请问</asp:ListItem>
+                <asp:ListItem>请问</asp:ListItem>
+                <asp:ListItem>千万人</asp:ListItem>
+            </asp:DropDownList>
             <br />
         </div>
     </form>

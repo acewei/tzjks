@@ -99,4 +99,71 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
         Label13.Text = "";
         Timer1.Enabled = false;
     }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        GridView1.AllowPaging = false;
+        GridView1.ShowFooter = false;
+
+        bindgrid();
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.Charset = "utf-8";
+        Response.AppendHeader("Content-Disposition", "attachment;filename=" + System.Web.HttpUtility.UrlEncode("导出" + System.DateTime.Now.Date.ToString("yyyyMMdd")) + ".xls");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("utf-8");//设置输出流为简体中文
+
+        Response.ContentType = "application/ms-excel";//设置输出文件类型为excel文件。 
+        this.EnableViewState = false;
+        System.Globalization.CultureInfo myCItrad = new System.Globalization.CultureInfo("ZH-CN", true);
+        System.IO.StringWriter oStringWriter = new System.IO.StringWriter(myCItrad);
+        System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
+
+        ClearControls(GridView1);
+        this.GridView1.RenderControl(oHtmlTextWriter);
+        Response.Write(oStringWriter.ToString());
+        Response.End();
+
+        //还原分页显示
+        GridView1.AllowPaging = true;
+        GridView1.ShowFooter = true;
+        bindgrid();
+    }
+
+    private void ClearControls(Control control)
+    {
+        for (int i = control.Controls.Count - 1; i >= 0; i--)
+        {
+            ClearControls(control.Controls[i]);
+        }
+
+        if (!(control is TableCell))
+        {
+            if (control.GetType().GetProperty("SelectedItem") != null)
+            {
+                LiteralControl literal = new LiteralControl();
+                control.Parent.Controls.Add(literal);
+                try
+                {
+                    literal.Text = (string)control.GetType().GetProperty("SelectedItem").GetValue(control, null);
+                }
+                catch
+                {
+                }
+                control.Parent.Controls.Remove(control);
+            }
+            else if (control.GetType().GetProperty("Text") != null)
+            {
+                LiteralControl literal = new LiteralControl();
+                control.Parent.Controls.Add(literal);
+                literal.Text = (string)control.GetType().GetProperty("Text").GetValue(control, null);
+                control.Parent.Controls.Remove(control);
+            }
+        }
+        return;
+    }
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        // Confirms that an HtmlForm control is rendered for
+    }
 }
