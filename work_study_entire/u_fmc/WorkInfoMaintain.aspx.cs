@@ -18,395 +18,138 @@ using System.Reflection;
 
 public partial class WorkInfoMaintain : System.Web.UI.Page
 {
+    int alltimecount = Convert.ToInt32(DBManager.Query("select count(*) from time").Tables[0].Rows[0][0].ToString());
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack) bindgrid();
-        //设置数据库连接
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-        SqlConnection sqlconn = new SqlConnection(sqlconnstr);
-        sqlconn.Open();
+        //begin
+        if (!IsPostBack)
+        {
+            bindgrid();
+        }
     }
     void bindgrid()
     {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-        DataSet ds = new DataSet();
-        using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
-        {
-            SqlDataAdapter sqld = new SqlDataAdapter("select PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand,IsConfirm from WorkInfo", sqlconn);
-            sqld.Fill(ds, "tabWorkInfo");
-        }
-        GridView1.DataSource = ds.Tables["tabWorkInfo"].DefaultView;
+
+        GridView1.DataSource = DBManager.Query("select * from workinfo ");
         GridView1.DataBind();
+
     }
+
 
     protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         GridView1.EditIndex = -1;
         bindgrid();
+        bindtimev();
     }
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        //设置数据库连接
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; ;
-        SqlConnection sqlconn = new SqlConnection(sqlconnstr);
-        sqlconn.Open();
-        //删除行处理
-        String sql = "delete from WorkInfo where PostId='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
-        SqlCommand Comm = new SqlCommand(sql, sqlconn);
-        Comm.ExecuteNonQuery();
-        sqlconn.Close();
-        sqlconn = null;
-        Comm = null;
-        GridView1.EditIndex = -1;
+        string postid = GridView1.DataKeys[e.RowIndex].Value.ToString();
+        DBManager.Nonquery("delete from workinfo where postid='" + postid + "'");
+        DBManager.Nonquery("delete from workreqtime where postid='" + postid + "'");
         bindgrid();
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
     {
+        GridView1.SelectedIndex = e.NewEditIndex;
         GridView1.EditIndex = e.NewEditIndex;
         bindgrid();
-    }
 
+        string postid = GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString();
+
+        try
+        {
+
+
+            DataTable ds = DBManager.Query("select tid from workreqtime where postid='" + postid + "'").Tables[0];
+
+            workreqtimev.DataSource = DBManager.Query("select * from time");
+            workreqtimev.DataBind();
+
+            //((CheckBox)workreqtimev.FindControl("checktime")).Visible = true;
+
+
+
+            for (int i = 0; i < alltimecount; i++)
+            {
+                ((CheckBox)workreqtimev.Rows[i].Cells[5].FindControl("checktime")).Visible = true;
+                foreach (DataRow x in ds.Rows)
+                {
+                    if (x[0].ToString() == workreqtimev.DataKeys[i].Value.ToString())
+                        ((CheckBox)workreqtimev.Rows[i].Cells[5].FindControl("checktime")).Checked = true;
+                }
+            }
+        }
+        catch (Exception aa)
+        {
+            warn.Text = aa.ToString();
+        }
+    }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        try
+        string gradereq = "";
+        CheckBoxList gradecl = (CheckBoxList)(GridView1.Rows[e.RowIndex].Cells[5].FindControl("gradeadd0"));
+        foreach (ListItem x in gradecl.Items)
         {
-            warn.Text = "asfaf";
-            string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; ;
-            SqlConnection sqlconn = new SqlConnection(sqlconnstr);
-            //提交行修改
-            sqlconn.Open();
-            SqlCommand Comm = new SqlCommand();
-            Comm.Connection = sqlconn;
-            Comm.CommandText = "update WorkInfo set Post=@Post, WorkPlace=@WorkPlace,HourlyWage=@HourlyWage,GenderReq=@GenderReq,BelongUnit=@BelongUnit,GradeReq=@GradeReq,LossForAbsence=@LossForAbsence,JobDescription=@JobDescription,PeoNumberDemand=@PeoNumberDemand,IsConfirm=@IsConfirm where PostId=@PostId";
-            Comm.Parameters.AddWithValue("@PostId", GridView1.DataKeys[e.RowIndex].Value.ToString());
-            Comm.Parameters.AddWithValue("@Post", ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@WorkPlace", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@HourlyWage", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@GenderReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[4].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@BelongUnit", ((TextBox)GridView1.Rows[e.RowIndex].Cells[5].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@GradeReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[6].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@LossForAbsence", ((TextBox)GridView1.Rows[e.RowIndex].Cells[7].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@JobDescription", ((TextBox)GridView1.Rows[e.RowIndex].Cells[8].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@PeoNumberDemand", ((TextBox)GridView1.Rows[e.RowIndex].Cells[9].Controls[0]).Text);
-            Comm.Parameters.AddWithValue("@IsConfirm", ((CheckBox)GridView1.Rows[e.RowIndex].Cells[12].Controls[0]).Checked);
-
-            Comm.ExecuteNonQuery();
-            sqlconn.Close();
-            sqlconn = null;
-            Comm = null;
-            GridView1.EditIndex = -1;
-            bindgrid();
-        }catch(Exception sdfsf)
-        {
-            warn.Text = sdfsf.ToString();
+            if (x.Selected) gradereq += "," + x.Text.Trim();
         }
-    }
+        if (gradereq.Length != 0)
+            gradereq = gradereq.Substring(1);
+        string postid = GridView1.DataKeys[e.RowIndex].Value.ToString();
+        string post = ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text;
+        string workplace = ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
+        string hourwage = ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
+        string genderreq = ((DropDownList)GridView1.Rows[e.RowIndex].Cells[4].FindControl("xb")).SelectedValue;
 
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        
-        
-            string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-        SqlConnection sqlconn = new SqlConnection(sqlconnstr);
-        //建立Command对象
-        SqlCommand sqlcommand = new SqlCommand();
-        sqlcommand.Connection = sqlconn;
-        //把SQL语句赋给Command对象
-        try
+        string loss = ((TextBox)GridView1.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
+        string descri = ((TextBox)GridView1.Rows[e.RowIndex].Cells[7].FindControl("TextBox1")).Text;
+        //((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text
+        string peoneed = ((TextBox)GridView1.Rows[e.RowIndex].Cells[8].Controls[1]).Text;
+        string applybe = ((TextBox)GridView1.Rows[e.RowIndex].Cells[9].Controls[1]).Text;
+        string applyfi = ((TextBox)GridView1.Rows[e.RowIndex].Cells[10].Controls[1]).Text;
+        bool isconfirm = ((CheckBox)GridView1.Rows[e.RowIndex].Cells[11].Controls[0]).Checked;
+        //Page.ClientScript.RegisterClientScriptBlock(GetType(), "as", "alert('"+post+workplace+loss+applybe+hourwage+"')", true);
+        DBManager.Nonquery("update workinfo set workplace='" + workplace + "',hourlywage='" + hourwage + "',genderreq='" + genderreq + "',lossforabsence='" + loss + "'," +
+            "jobdescription='" + descri + "', PeoNumberDemand='" + peoneed + "',applytimebe='" + applybe + "',gradereq='" + gradereq + "', ApplyTimeFi='" + applyfi + "',IsConfirm='" + isconfirm + "' where postid='" + postid + "'");
+        DBManager.Nonquery("delete from workreqtime where postid='" + GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString() + "'");
+        for (int i = 0; i < alltimecount; i++)
         {
-            sqlcommand.CommandText = "insert into WorkInfo(PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand)values (@PostId,@Post,@WorkPlace,@HourlyWage,@GenderReq,@BelongUnit,@GradeReq,@LossForAbsence,@JobDescription,@ApplyTimeBe,@ApplyTimeFi,@PeoNumberDemand)";
-        sqlcommand.Parameters.AddWithValue("@PostId", TextBox1.Text);
-        sqlcommand.Parameters.AddWithValue("@Post", TextBox2.Text);
-        sqlcommand.Parameters.AddWithValue("@WorkPlace", TextBox3.Text);
-        sqlcommand.Parameters.AddWithValue("@HourlyWage", TextBox4.Text);
-        sqlcommand.Parameters.AddWithValue("@GenderReq", TextBox5.Text);
-        sqlcommand.Parameters.AddWithValue("@BelongUnit", TextBox6.Text);
-        sqlcommand.Parameters.AddWithValue("@GradeReq", TextBox7.Text);
-        sqlcommand.Parameters.AddWithValue("@LossForAbsence", TextBox8.Text);
-        sqlcommand.Parameters.AddWithValue("@JobDescription", TextBox9.Text);
-        sqlcommand.Parameters.AddWithValue("@ApplyTimeBe", TextBox10.Text);
-        sqlcommand.Parameters.AddWithValue("@ApplyTimeFi", TextBox11.Text);
-        sqlcommand.Parameters.AddWithValue("@PeoNumberDemand", TextBox12.Text);
-       
-            //打开连接
-            sqlconn.Open();
-            //执行SQL命令
-            sqlcommand.ExecuteNonQuery();
-            Label2.Text = "成功增加记录";
-            TextBox1.Text = String.Empty;
-            TextBox2.Text = String.Empty;
-            TextBox3.Text = String.Empty;
-            TextBox4.Text = String.Empty;
-            TextBox5.Text = String.Empty;
-            TextBox6.Text = String.Empty;
-            TextBox7.Text = String.Empty;
-            TextBox8.Text = String.Empty;
-            TextBox9.Text = String.Empty;
-            TextBox10.Text = String.Empty;
-            TextBox11.Text = String.Empty;
-            TextBox12.Text = String.Empty;
-          
-        }
-        catch (Exception ex)
-        {
-            warn.Text = "错误原因：" + ex.Message;
-        }
-        finally
-        {
-            sqlcommand = null;
-            sqlconn.Close();
-            sqlconn = null;
-            GridView1.EditIndex = -1;
-            bindgrid();
-        }
 
-    }
-
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-        TextBox1.Text = String.Empty;
-        TextBox2.Text = String.Empty;
-        TextBox3.Text = String.Empty;
-        TextBox4.Text = String.Empty;
-        TextBox5.Text = String.Empty;
-        TextBox6.Text = String.Empty;
-        TextBox7.Text = String.Empty;
-        TextBox8.Text = String.Empty;
-        TextBox9.Text = String.Empty;
-        TextBox10.Text = String.Empty;
-        TextBox11.Text = String.Empty;
-        TextBox12.Text = String.Empty;
-    }
-
-    /// <summary>
-    /// 翻页操作
-    /// 在GridView当前索引正在更改时触发
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        #region 方法1 废弃
-
-        //txtName.Text = "翻页操作";
-        //int index = e.NewPageIndex+1;
-        //DataSet ds = SplitDataSet(index);
-        //DataTable dt = ds.Tables[0];
-        ////DataGrid1.DataSource = dt;
-        ////DataGrid1.DataBind();
-        //GridView1.DataSource = dt;
-        //GridView1.DataBind();
-        //ClearDisplay();
-        //GridView1.AllowCustomPaging = false;         
-
-        #endregion
-
-        #region 方法2
-
-        //GridView1.PageIndex = e.NewPageIndex;
-        //InitGridView();
-
-        #endregion
-
-        #region 方法3
-
-        #region 前台
-
-        //<PagerTemplate>
-        //    当前第:
-        //     <%--//((GridView)Container.NamingContainer)就是为了得到当前的控件--%>
-        //    <asp:Label ID="LabelCurrentPage" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageIndex + 1 %>"></asp:Label>
-        //    页/共:
-        //    <%--//得到分页页面的总数--%>
-        //    <asp:Label ID="LabelPageCount" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageCount %>"></asp:Label>
-        //    页
-        //    <%--//如果该分页是首分页，那么该连接就不会显示了.同时对应了自带识别的命令参数CommandArgument--%>
-        //    <asp:LinkButton ID="LinkButtonFirstPage" runat="server" CommandArgument="First" CommandName="Page"
-        //        Visible='<%#((GridView)Container.NamingContainer).PageIndex != 0 %>'>首页</asp:LinkButton>
-        //    <asp:LinkButton ID="LinkButtonPreviousPage" runat="server" CommandArgument="Prev"
-        //        CommandName="Page" Visible='<%# ((GridView)Container.NamingContainer).PageIndex != 0 %>'>上一页</asp:LinkButton>
-        //    <%--//如果该分页是尾页，那么该连接就不会显示了--%>
-        //    <asp:LinkButton ID="LinkButtonNextPage" runat="server" CommandArgument="Next" CommandName="Page"
-        //        Visible='<%# ((GridView)Container.NamingContainer).PageIndex != ((GridView)Container.NamingContainer).PageCount - 1 %>'>下一页</asp:LinkButton>
-        //    <asp:LinkButton ID="LinkButtonLastPage" runat="server" CommandArgument="Last" CommandName="Page"
-        //        Visible='<%# ((GridView)Container.NamingContainer).PageIndex != ((GridView)Container.NamingContainer).PageCount - 1 %>'>尾页</asp:LinkButton>
-        //    转到第
-        //    <asp:TextBox ID="txtNewPageIndex" runat="server" Width="20px" Text='<%# ((GridView)Container.Parent.Parent).PageIndex + 1 %>' />页
-        //    <%--//这里将CommandArgument即使点击该按钮e.newIndex 值为3 --%>
-        //    <asp:LinkButton ID="btnGo" runat="server" CausesValidation="False" CommandArgument="-2"
-        //        CommandName="Page" Text="GO" />
-        //</PagerTemplate>
-
-        #endregion
-
-        // 得到该控件
-        GridView theGrid = sender as GridView;
-        int newPageIndex = 0;
-        if (e.NewPageIndex == -3)
-        {
-            //点击了Go按钮
-            TextBox txtNewPageIndex = null;
-
-            //GridView较DataGrid提供了更多的API，获取分页块可以使用BottomPagerRow 或者TopPagerRow，当然还增加了HeaderRow和FooterRow
-            GridViewRow pagerRow = theGrid.BottomPagerRow;
-
-            if (pagerRow != null)
+            if (((CheckBox)workreqtimev.Rows[i].Cells[4].FindControl("checktime")).Checked)
             {
-                //得到text控件
-                txtNewPageIndex = pagerRow.FindControl("txtNewPageIndex") as TextBox;
-            }
-            if (txtNewPageIndex != null)
-            {
-                //得到索引
-                newPageIndex = int.Parse(txtNewPageIndex.Text) - 1;
+                DBManager.Nonquery("insert into workreqtime(wrid,postid,tid) values('" + GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString() + workreqtimev.DataKeys[i].Value.ToString() + "','" + GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString() + "','" + workreqtimev.DataKeys[i].Value.ToString() + "')");
+
             }
         }
-        else
-        {
-            //点击了其他的按钮
-            newPageIndex = e.NewPageIndex;
-        }
-        //防止新索引溢出
-        newPageIndex = newPageIndex < 0 ? 0 : newPageIndex;
-        newPageIndex = newPageIndex >= theGrid.PageCount ? theGrid.PageCount - 1 : newPageIndex;
-
-        //得到新的值
-        theGrid.PageIndex = newPageIndex;
-
-        //重新绑定
         GridView1.EditIndex = -1;
-        bindgrid();
-        #endregion
-
-
-    }
-
-    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        //如果是绑定数据行 
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            //当鼠标停留时更改背景色
-            e.Row.Attributes.Add("onmouseover", "c=this.style.backgroundColor;this.style.backgroundColor='AliceBlue';this.style.cursor='pointer'");
-            //当鼠标移开时还原背景色
-            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=c");
-            //当有编辑列时，避免出错，要加的RowState判断 
-            //if (e.Row.RowState == DataControlRowState.Normal || e.Row.RowState == DataControlRowState.Alternate)
-            // {
-            //    ((Button)e.Row.Cells[6].Controls[0]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：\"" + e.Row.Cells[1].Text + "\"吗?')");               
-            //}
-
-        }
-        //自动编号功能
-        //if (e.Row.RowIndex != -1)
-        // {
-        //    int id = e.Row.RowIndex + 1;
-        //     e.Row.Cells[0].Text = id.ToString();
-        // }
-
-
-    }
-    /// <summary>
-    /// 导出Excel功能
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void Button3_Click(object sender, EventArgs e)
-    {
-        //导出全部数据，取消分页
-        GridView1.AllowPaging = false;
-        GridView1.ShowFooter = false;
 
         bindgrid();
-
-        Response.Clear();
-        Response.Buffer = true;
-        Response.Charset = "utf-8";
-        Response.AppendHeader("Content-Disposition", "attachment;filename=" + System.Web.HttpUtility.UrlEncode("导出" + System.DateTime.Now.Date.ToString("yyyyMMdd")) + ".xls");
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("utf-8");//设置输出流为简体中文
-
-        Response.ContentType = "application/ms-excel";//设置输出文件类型为excel文件。 
-        this.EnableViewState = false;
-        System.Globalization.CultureInfo myCItrad = new System.Globalization.CultureInfo("ZH-CN", true);
-        System.IO.StringWriter oStringWriter = new System.IO.StringWriter(myCItrad);
-        System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
-
-        ClearControls(GridView1);
-        this.GridView1.RenderControl(oHtmlTextWriter);
-        Response.Write(oStringWriter.ToString());
-        Response.End();
-
-        //还原分页显示
-        GridView1.AllowPaging = true;
-        GridView1.ShowFooter = true;
-        bindgrid();
+        bindtimev();
     }
 
-    /// <summary>
-    /// GridView如果需要实现导出Excel功能，则该函数需要重载
-    /// </summary>
-    /// <param name="control"></param>
-    public override void VerifyRenderingInServerForm(Control control)
-    {
-        // Confirms that an HtmlForm control is rendered for
-    }
 
-    /// <summary>
-    /// 清除控件中的所有控件，以便导出Excel
-    /// </summary>
-    /// <param name="control"></param>
-    private void ClearControls(Control control)
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        for (int i = control.Controls.Count - 1; i >= 0; i--)
+
+        string postid = GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString();
+        try
         {
-            ClearControls(control.Controls[i]);
+            bindtimev();
+        }
+        catch (Exception ef)
+        {
+            warn.Text = ef.ToString();
         }
 
-        if (!(control is TableCell))
-        {
-            if (control.GetType().GetProperty("SelectedItem") != null)
-            {
-                LiteralControl literal = new LiteralControl();
-                control.Parent.Controls.Add(literal);
-                try
-                {
-                    literal.Text = (string)control.GetType().GetProperty("SelectedItem").GetValue(control, null);
-                }
-                catch
-                {
-                }
-                control.Parent.Controls.Remove(control);
-            }
-            else if (control.GetType().GetProperty("Text") != null)
-            {
-                LiteralControl literal = new LiteralControl();
-                control.Parent.Controls.Add(literal);
-                literal.Text = (string)control.GetType().GetProperty("Text").GetValue(control, null);
-                control.Parent.Controls.Remove(control);
-            }
-        }
-        return;
     }
-    protected void Buttonsearch_Click(object sender, EventArgs e)
+    void bindtimev()
     {
-        TestCon();
-    }
-    private void TestCon()
-    {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-        DataSet ds = new DataSet();
-        //自定义查询SQL字符串
-        string strTemp = TextBoxsearch.Text;  //需要查寻的数据，从TextBox中读取 
-        using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
-        {
-            SqlDataAdapter sqld = new SqlDataAdapter("SELECT * FROM WorkInfo WHERE (( PostId like '%" + TextBoxsearch.Text.ToString() + "%') or (Post like '%" + TextBoxsearch.Text.ToString() + "%')) Order by PostId Desc", sqlconn);
-            sqld.Fill(ds, "tabWorkInfo");
-        }
-        GridView1.DataSource = ds.Tables["tabWorkInfo"].DefaultView;
-        GridView1.DataBind();
+        string postid = GridView1.DataKeys[GridView1.SelectedIndex].Value.ToString();
+        workreqtimev.DataSource = DBManager.Query("select * from workreqtime,time where time.tid=workreqtime.tid and postid='" + postid + "'");
 
+        workreqtimev.DataBind();
     }
 }
