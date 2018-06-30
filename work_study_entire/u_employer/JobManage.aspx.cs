@@ -127,15 +127,16 @@ public partial class u_employer_JobManage : System.Web.UI.Page
             string gradereq = "";
             foreach (ListItem x in gradeadd.Items)
             {
-                if (x.Selected) gradereq += "," + x.Text.Trim();
+                if (x.Selected) gradereq += ("," + x.Text.Trim());
             }
             if (gradereq.Length > 0)
                 gradereq = gradereq.Substring(1);
-
+            
             string post = postname.Text;
             string workplace = workplace1.Text;
             string hourwage = shixin.Text;
             string genderreq = genderreq1.SelectedValue;
+       
 
             int alltime = Convert.ToInt32(DBManager.Query("select count(*) from time").Tables[0].Rows[0][0].ToString());
             string loss = loss1.Text;

@@ -12,23 +12,13 @@
         <div>
             <asp:Label ID="Label1" Text="afafsdf" runat="server"></asp:Label>
             <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="sid" OnRowCommand="GridView1_RowCommand">
-                <Columns>
-                    <asp:BoundField DataField="sid" HeaderText="fsf" />
-                    <asp:BoundField DataField="sname" HeaderText="esfseg" />
-                    <asp:BoundField DataField="ssex" HeaderText="sgegs" />
-                    <asp:TemplateField ShowHeader="False">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" CommandName="xs" Text="按钮"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
-            <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem>请问</asp:ListItem>
-                <asp:ListItem>请问</asp:ListItem>
-                <asp:ListItem>千万人</asp:ListItem>
-            </asp:DropDownList>
+            <asp:CheckBoxList ID="CheckBoxList1" runat="server" RepeatDirection="Horizontal">
+                <asp:ListItem>大一</asp:ListItem>
+                <asp:ListItem>大二</asp:ListItem>
+                <asp:ListItem>大三</asp:ListItem>
+                <asp:ListItem>大四</asp:ListItem>
+            </asp:CheckBoxList>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
             <br />
         </div>
     </form>

@@ -5,19 +5,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="MainDiv">
-        <table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
-
-            <tr>
-                <td>
-                    <br />
-                    <br />
-                    <br />
-                </td>
-            </tr>
-
-            <tr>
-                <td class="CPanel">
+    <style>
+        td{
+            margin:30px
+        }
+    </style>
+    <div class="modal-body" style="padding:20px">
+       
                     <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
                         <tr>
                             <td align="left">
@@ -148,10 +142,7 @@
                         </tr>
                     </table>
 
-                </td>
-            </tr>
-
-        </table>
+             
     </div>
 </asp:Content>
 

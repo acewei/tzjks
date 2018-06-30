@@ -152,12 +152,15 @@
      <tr>
      <td style="width: 100px; text-align: right">  学生性别：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></td> 
+     <asp:DropDownList ID="TextBox3" runat="server">
+         <asp:ListItem>男</asp:ListItem>
+         <asp:ListItem>女</asp:ListItem>
+     </asp:DropDownList></td> 
      </tr>
      <tr>
      <td style="width: 100px; text-align: right"> 入学时间：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox></td>  
+     <asp:TextBox ID="TextBox4" TextMode="Date" runat="server"></asp:TextBox></td>  
      </tr>
      <tr>
      <td style="width: 100px; text-align: right"> 所属银行：</td>

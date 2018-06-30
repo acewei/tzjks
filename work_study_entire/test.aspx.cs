@@ -11,27 +11,27 @@ public partial class test : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bindg();
+           
         }
     }
 
-   void bindg()
+  
+
+
+
+
+
+    
+
+    protected void Button1_Click(object sender, EventArgs e)
     {
-       
-        GridView1.DataSource = DBManager.Query("select * from student");
-        GridView1.DataBind();
-    }
-
-
-
-
-
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        if (e.CommandName == "xs")
+        string gradereq = "";
+        foreach (ListItem x in CheckBoxList1.Items)
         {
-            int row = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
-            Label1.Text = GridView1.DataKeys[row].Value.ToString();
+            if (x.Selected) gradereq += ("," + x.Text.Trim());
         }
+        if (gradereq.Length > 0)
+            gradereq = gradereq.Substring(1);
+        Label1.Text = gradereq;
     }
 }
