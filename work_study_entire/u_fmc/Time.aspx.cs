@@ -104,7 +104,7 @@ public partial class u_fmc_Time : System.Web.UI.Page
         //把SQL语句赋给Command对象
         sqlcommand.CommandText = "insert into Time(TId,WhatDay,StartTime,EndTime,TimeLength)values (@TId,@WhatDay,@StartTime,@EndTime,@TimeLength)";
         sqlcommand.Parameters.AddWithValue("@TId", TextBox1.Text);
-        sqlcommand.Parameters.AddWithValue("@WhatDay", TextBox2.Text);
+        sqlcommand.Parameters.AddWithValue("@WhatDay", TextBox2.SelectedValue);
         sqlcommand.Parameters.AddWithValue("@StartTime", TextBox3.Text);
         sqlcommand.Parameters.AddWithValue("@EndTime", TextBox4.Text);
         sqlcommand.Parameters.AddWithValue("@TimeLength", TextBox4.Text);
@@ -118,8 +118,7 @@ public partial class u_fmc_Time : System.Web.UI.Page
             TextBox1.Text = String.Empty;
             TextBox2.Text = String.Empty;
             TextBox3.Text = String.Empty;
-            TextBox4.Text = String.Empty;
-            TextBox5.Text = String.Empty;
+            TextBox4.Text = String.Empty;          
         }
         catch (Exception ex)
         {
@@ -142,7 +141,7 @@ public partial class u_fmc_Time : System.Web.UI.Page
         TextBox2.Text = String.Empty;
         TextBox3.Text = String.Empty;
         TextBox4.Text = String.Empty;
-        TextBox5.Text = String.Empty;
+        
     }
 
     /// <summary>

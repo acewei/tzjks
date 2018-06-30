@@ -143,7 +143,29 @@
      <tr>
      <td style="width: 400px; text-align: right"> 周几：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox2" runat="server" Width="230px"></asp:TextBox></td> 
+     <asp:DropDownList ID="TextBox2" runat="server" Width="230px">
+         <asp:ListItem>
+             星期一
+         </asp:ListItem>
+         <asp:ListItem>
+             星期二
+         </asp:ListItem>
+         <asp:ListItem>
+             星期三
+         </asp:ListItem>
+         <asp:ListItem>
+             星期四
+         </asp:ListItem>
+         <asp:ListItem>
+             星期五
+         </asp:ListItem>
+         <asp:ListItem>
+             星期六
+         </asp:ListItem>
+         <asp:ListItem>
+             星期日
+         </asp:ListItem>
+     </asp:DropDownList></td> 
      </tr>
      <tr>
      <td style="width: 400px; text-align: right">  开始时间：</td>
@@ -154,11 +176,6 @@
      <td style="width: 400px; text-align: right"> 结束时间：</td>
      <td class="auto-style6">
      <asp:TextBox ID="TextBox4" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td>  
-     </tr>
-     <tr>
-     <td style="width: 400px; text-align: right"> 时长：</td>
-     <td class="auto-style6">
-     <asp:TextBox ID="TextBox5" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td>  
      </tr>
 
      <tr>
