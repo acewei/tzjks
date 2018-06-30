@@ -31,7 +31,7 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
 
     void bindgrid()
     {
-        GridView1.DataSource = DBManager.Query("select * from schedule order by validstart desc");
+        GridView1.DataSource = DBManager.Query("select schedule.* from schedule,employer where left(schedule.postid,2)=employer.employerid and employername='"+Session["remark"]+"' order by validstart desc");
         GridView1.DataBind();
     }
 
@@ -61,12 +61,12 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
     {
         int cou = 0;
         sid = DBManager.Query("select sid from student where sname='" + DropDownList1.SelectedValue + "'").Tables[0].Rows[0][0].ToString();
-        postid = DBManager.Query("select postid from workinfo where post='" + DropDownList2.SelectedValue + "' and belongunit='西苑'").Tables[0].Rows[0][0].ToString();
+        postid = DBManager.Query("select postid from workinfo where post='" + DropDownList2.SelectedValue + "' and belongunit='"+Session["remark"]+"'").Tables[0].Rows[0][0].ToString();
 
         d1 = t1.Text;
         d2 = t2.Text;
         int allar = Convert.ToInt32(DBManager.Query("select count(*) from stufreetime,workreqtime,workinfo,student,time where stufreetime.tid=time.tid and stufreetime.tid=workreqtime.tid and workreqtime.postid=workinfo.postid and stufreetime.sid=student.sid and student.sname='" + DropDownList1.SelectedValue + "' and workinfo.post='" + DropDownList2.SelectedValue + "' ").Tables[0].Rows[0][0].ToString());
-        for (int i = 0; i < allar; i++)
+        for (int i = 0; i < allar; i++)//ok
 
             if (((CheckBox)GridView2.Rows[i].Cells[5].FindControl("CheckBox1")).Checked)
 
@@ -92,6 +92,8 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
         //Page.ClientScript.RegisterClientScriptBlock(GetType(), "dasd", "alert('asd')", true);
         GridView2.DataSource = DBManager.Query("select time.* from stufreetime,workreqtime,workinfo,student,time where stufreetime.tid=time.tid and stufreetime.tid=workreqtime.tid and workreqtime.postid=workinfo.postid and stufreetime.sid=student.sid and student.sname='" + DropDownList1.SelectedValue + "' and workinfo.post='" + DropDownList2.SelectedValue + "' ");
         GridView2.DataBind();
+        DropDownList2.DataSource = DBManager.Query("select * from workinfo,apply,shinfo,student where apply.applyid=shinfo.applyid and apply.sid=student.sid and apply.postid=workinfo.postid and student.sname='" + DropDownList1.SelectedValue + "'");
+        DropDownList2.DataBind();
     }
 
     protected void Timer1_Tick(object sender, EventArgs e)
@@ -165,5 +167,10 @@ public partial class u_employer_JobArrange : System.Web.UI.Page
     public override void VerifyRenderingInServerForm(Control control)
     {
         // Confirms that an HtmlForm control is rendered for
+    }
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }

@@ -16,7 +16,7 @@
         条记录
            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                <ContentTemplate>
-                   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="Vertical" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="20" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px">
+                   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" GridLines="Vertical" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="20" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True">
                        <AlternatingRowStyle BackColor="White" />
 
                        <Columns>
@@ -70,13 +70,15 @@
                    </asp:GridView>
                </ContentTemplate>
            </asp:UpdatePanel>
-    <asp:Button ID="Button2" OnClick="Button2_Click" runat="server" Text="导出工作安排表" />
+    
     </div>    
     
     
 
 
-            
+            <div class="btn btn-primary" style="padding:0px;margin:20px">
+                <asp:Button ID="Button2" OnClick="Button2_Click" runat="server" Text="导出工作安排表" />
+            </div>
             
         
     
