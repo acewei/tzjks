@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="MainForEmployer.master" AutoEventWireup="true" CodeFile="AttendanceMgr.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    
     <div>
 
         <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">生成考勤</asp:LinkButton><input id="input1" type="number" runat="server" />天考勤量&nbsp; 
@@ -12,49 +13,29 @@
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    时间:<asp:Label ID="Label2" runat="server" Text="选择日期"></asp:Label>
-                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/日历.png" OnClick="ImageButton1_Click" />
-                    &nbsp;到&nbsp;<asp:Label ID="Label3" runat="server" Text="选择日期"></asp:Label>
-                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/日历.png" OnClick="ImageButton2_Click" />
+                    时间:<asp:TextBox ID="t1" runat="server"></asp:TextBox>
+                    &nbsp;到&nbsp;
+                  <asp:TextBox ID="t2" runat="server"></asp:TextBox>
                     &nbsp;
              
-    
+                <asp:Button ID="Button3" style="margin-left:15px" class="btn btn-primary"  data-loading-text="导出"
+   	               type="button" runat="server" OnClick="Button3_Click" Text="打印考勤表" />
                 </ContentTemplate>
+               
+        <Triggers>
+            <asp:PostBackTrigger ControlID="Button3" />
+        </Triggers>
             </asp:UpdatePanel>
             <asp:Button ID="Button1" runat="server" Text="查询" OnClick="Button1_Click" />
             &nbsp;
         </asp:Panel>
-         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                <ContentTemplate>
-                    <div style="position: absolute; float: right; margin-right: 60%; z-index: 333">
-                        <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged" Visible="False" BackColor="#FFFFCC" BorderColor="#FFCC66" BorderWidth="1px" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#663399" Height="200px" ShowGridLines="True" Width="220px">
-                            <DayHeaderStyle BackColor="#FFCC66" Font-Bold="True" Height="1px"></DayHeaderStyle>
-
-                            <NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC"></NextPrevStyle>
-
-                            <OtherMonthDayStyle ForeColor="#CC9966"></OtherMonthDayStyle>
-
-                            <SelectedDayStyle BackColor="#CCCCFF" Font-Bold="True"></SelectedDayStyle>
-
-                            <SelectorStyle BackColor="#FFCC66"></SelectorStyle>
-
-                            <TitleStyle BackColor="#990000" Font-Bold="True" Font-Size="9pt" ForeColor="#FFFFCC"></TitleStyle>
-
-                            <TodayDayStyle BackColor="#FFCC66" ForeColor="White"></TodayDayStyle>
-                        </asp:Calendar>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        &nbsp;<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="20" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting">
+        <asp:Panel ID="Panel2" runat="server">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 
             <Columns>
                 <asp:BoundField DataField="wcid" HeaderText="考勤号" ReadOnly="True" />
                 <asp:TemplateField HeaderText="学号" ControlStyle-Width="100px" FooterStyle-Width="100px" HeaderStyle-Width="100px" ItemStyle-Width="50px">
-                   <%-- <EditItemTemplate>
-                        <asp:DropDownList ID="DropDownList1" runat="server" Visible="true" DataSourceID="SqlDataSource1" DataTextField="sid" DataValueField="sid">
-                        </asp:DropDownList>
-                    </EditItemTemplate>--%>
                     <ItemTemplate>
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("sid") %>'></asp:Label>
                     </ItemTemplate>
@@ -95,9 +76,10 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-
+            
+        </asp:Panel>
+                 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:WSConnectionString %>" SelectCommand="select sid from student"></asp:SqlDataSource>
-
     </div>
 </asp:Content>
 

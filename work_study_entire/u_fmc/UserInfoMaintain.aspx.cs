@@ -94,16 +94,18 @@ public partial class UserInfoMaintain : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
+        
+            string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
         SqlConnection sqlconn = new SqlConnection(sqlconnstr);
         //建立Command对象
         SqlCommand sqlcommand = new SqlCommand();
         sqlcommand.Connection = sqlconn;
         //把SQL语句赋给Command对象
-        sqlcommand.CommandText = "insert into [User](UserName,Password,UserId,Remark)values (@UserName,@Password,@UserId,@Remark)";
+       
+            sqlcommand.CommandText = "insert into [User](UserName,Password,UserId,Remark)values (@UserName,@Password,@UserId,@Remark)";
         sqlcommand.Parameters.AddWithValue("@UserName", TextBox1.Text);
-        sqlcommand.Parameters.AddWithValue("@Password", TextBox2.Text);
-        sqlcommand.Parameters.AddWithValue("@UserId", TextBox3.Text);
+        sqlcommand.Parameters.AddWithValue("@Password", GetStrMd5(TextBox2.Text));
+        sqlcommand.Parameters.AddWithValue("@UserId", TextBox3.SelectedValue);
         sqlcommand.Parameters.AddWithValue("@Remark", TextBox4.Text);
         try
         {
@@ -113,7 +115,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
             sqlcommand.ExecuteNonQuery();
             Label2.Text = "成功增加记录";
             TextBox1.Text = String.Empty;
-            TextBox2.Text = String.Empty;
+            
             TextBox3.Text = String.Empty;
             TextBox4.Text = String.Empty;
         }
@@ -138,6 +140,7 @@ public partial class UserInfoMaintain : System.Web.UI.Page
         TextBox2.Text = String.Empty;
         TextBox3.Text = String.Empty;
         TextBox4.Text = String.Empty;
+        
     }
 
     /// <summary>
@@ -370,40 +373,30 @@ public partial class UserInfoMaintain : System.Web.UI.Page
     }
 
 
+
+
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if(e.CommandName == "reset")
+        try
         {
-            //int row = ((GridViewRow)((Button)e.CommandSource).NamingContainer).RowIndex;
-            //string va = GridView1.DataKeys[row].Value.ToString();
-            Page.ClientScript.RegisterClientScriptBlock(GetType(), "asd", "alert('sdfsdffg')", true);
-            //  string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-            //SqlConnection connection = new SqlConnection(sqlconnstr);
-            //connection.Open();
-            //SqlCommand command = connection.CreateCommand();
-            //command.CommandText = "Update [User] set Password= substring(sys.fn_sqlvarbasetostr(HashBytes('MD5','123456')),3,32) where UserName='va'";
-            //int i = command.ExecuteNonQuery();
-            //connection.Close();
-            //this.bindgrid();
+            if (e.CommandName == "myreset")
+            {
+                int row = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
+                DBManager.Nonquery("update [user] set Password='" + GetStrMd5("123456") + "' where username='" + GridView1.DataKeys[row].Value.ToString() + "'");
+            }
+        }catch(Exception zf)
+        {
+            warn.Text = zf.ToString();
         }
-        
+        bindgrid();
     }
 
-    //protected void ResetButton_Command(object sender, CommandEventArgs e)
-    //{
-    //    if(e.CommandName=="reset")
-    //    {
-    //        int row = ((GridViewRow)((Button)e.CommandSource).NamingContainer).RowIndex;
-    //        string va = GridView1.DataKeys[row].Value.ToString();
-    //        //Page.ClientScript.RegisterClientScriptBlock(GetType(), "asd", "alert('sdfsdffg')", true);
-    //        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
-    //        SqlConnection connection = new SqlConnection(sqlconnstr);
-    //        connection.Open();
-    //        SqlCommand command = connection.CreateCommand();
-    //        command.CommandText = "Update [User] set Password= substring(sys.fn_sqlvarbasetostr(HashBytes('MD5','123456')),3,32) where UserName='va'";
-    //        int i = command.ExecuteNonQuery();
-    //        connection.Close();
-    //        this.bindgrid();
-    //    }
-    //}
+    public static string GetStrMd5(string ConvertString)
+    {
+        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+        string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(ConvertString)));
+        t2 = t2.Replace("-", "");
+        return t2.ToLower();
+
+    }
 }

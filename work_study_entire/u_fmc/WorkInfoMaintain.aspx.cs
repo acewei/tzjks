@@ -71,42 +71,53 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; ;
-        SqlConnection sqlconn = new SqlConnection(sqlconnstr);
-        //提交行修改
-        sqlconn.Open();
-        SqlCommand Comm = new SqlCommand();
-        Comm.Connection = sqlconn;
-        Comm.CommandText = "update WorkInfo set Post=@Post, WorkPlace=@WorkPlace,HourlyWage=@HourlyWage,GenderReq=@GenderReq,BelongUnit=@BelongUnit,GradeReq=@GradeReq,LossForAbsence=@LossForAbsence,JobDescription=@JobDescription,PeoNumberDemand=@PeoNumberDemand,IsConfirm=@IsConfirm where PostId=@PostId";
-        Comm.Parameters.AddWithValue("@PostId", GridView1.DataKeys[e.RowIndex].Value.ToString());
-        Comm.Parameters.AddWithValue("@Post", ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@WorkPlace", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@HourlyWage", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@GenderReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[4].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@BelongUnit", ((TextBox)GridView1.Rows[e.RowIndex].Cells[5].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@GradeReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[6].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@LossForAbsence", ((TextBox)GridView1.Rows[e.RowIndex].Cells[7].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@JobDescription", ((TextBox)GridView1.Rows[e.RowIndex].Cells[8].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@PeoNumberDemand", ((TextBox)GridView1.Rows[e.RowIndex].Cells[9].Controls[0]).Text);
-        Comm.Parameters.AddWithValue("@IsConfirm", ((TextBox)GridView1.Rows[e.RowIndex].Cells[10].Controls[0]).Text);
+        try
+        {
+            warn.Text = "asfaf";
+            string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString; ;
+            SqlConnection sqlconn = new SqlConnection(sqlconnstr);
+            //提交行修改
+            sqlconn.Open();
+            SqlCommand Comm = new SqlCommand();
+            Comm.Connection = sqlconn;
+            Comm.CommandText = "update WorkInfo set Post=@Post, WorkPlace=@WorkPlace,HourlyWage=@HourlyWage,GenderReq=@GenderReq,BelongUnit=@BelongUnit,GradeReq=@GradeReq,LossForAbsence=@LossForAbsence,JobDescription=@JobDescription,PeoNumberDemand=@PeoNumberDemand,IsConfirm=@IsConfirm where PostId=@PostId";
+            Comm.Parameters.AddWithValue("@PostId", GridView1.DataKeys[e.RowIndex].Value.ToString());
+            Comm.Parameters.AddWithValue("@Post", ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@WorkPlace", ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@HourlyWage", ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@GenderReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[4].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@BelongUnit", ((TextBox)GridView1.Rows[e.RowIndex].Cells[5].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@GradeReq", ((TextBox)GridView1.Rows[e.RowIndex].Cells[6].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@LossForAbsence", ((TextBox)GridView1.Rows[e.RowIndex].Cells[7].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@JobDescription", ((TextBox)GridView1.Rows[e.RowIndex].Cells[8].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@PeoNumberDemand", ((TextBox)GridView1.Rows[e.RowIndex].Cells[9].Controls[0]).Text);
+            Comm.Parameters.AddWithValue("@IsConfirm", ((CheckBox)GridView1.Rows[e.RowIndex].Cells[12].Controls[0]).Checked);
 
-        Comm.ExecuteNonQuery();
-        sqlconn.Close();
-        sqlconn = null;
-        Comm = null;
-        GridView1.EditIndex = -1;
-        bindgrid();
+            Comm.ExecuteNonQuery();
+            sqlconn.Close();
+            sqlconn = null;
+            Comm = null;
+            GridView1.EditIndex = -1;
+            bindgrid();
+        }catch(Exception sdfsf)
+        {
+            warn.Text = sdfsf.ToString();
+        }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
+        
+        
+            string sqlconnstr = ConfigurationManager.ConnectionStrings["WSConnectionString"].ConnectionString;
         SqlConnection sqlconn = new SqlConnection(sqlconnstr);
         //建立Command对象
         SqlCommand sqlcommand = new SqlCommand();
         sqlcommand.Connection = sqlconn;
         //把SQL语句赋给Command对象
-        sqlcommand.CommandText = "insert into WorkInfo(PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand)values (@PostId,@Post,@WorkPlace,@HourlyWage,@GenderReq,@BelongUnit,@GradeReq,@LossForAbsence,@JobDescription,@ApplyTimeBe,@ApplyTimeFi,@PeoNumberDemand)";
+        try
+        {
+            sqlcommand.CommandText = "insert into WorkInfo(PostId,Post,WorkPlace,HourlyWage,GenderReq,BelongUnit,GradeReq,LossForAbsence,JobDescription,ApplyTimeBe,ApplyTimeFi,PeoNumberDemand)values (@PostId,@Post,@WorkPlace,@HourlyWage,@GenderReq,@BelongUnit,@GradeReq,@LossForAbsence,@JobDescription,@ApplyTimeBe,@ApplyTimeFi,@PeoNumberDemand)";
         sqlcommand.Parameters.AddWithValue("@PostId", TextBox1.Text);
         sqlcommand.Parameters.AddWithValue("@Post", TextBox2.Text);
         sqlcommand.Parameters.AddWithValue("@WorkPlace", TextBox3.Text);
@@ -119,8 +130,7 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
         sqlcommand.Parameters.AddWithValue("@ApplyTimeBe", TextBox10.Text);
         sqlcommand.Parameters.AddWithValue("@ApplyTimeFi", TextBox11.Text);
         sqlcommand.Parameters.AddWithValue("@PeoNumberDemand", TextBox12.Text);
-        try
-        {
+       
             //打开连接
             sqlconn.Open();
             //执行SQL命令
@@ -138,10 +148,11 @@ public partial class WorkInfoMaintain : System.Web.UI.Page
             TextBox10.Text = String.Empty;
             TextBox11.Text = String.Empty;
             TextBox12.Text = String.Empty;
+          
         }
         catch (Exception ex)
         {
-            Label2.Text = "错误原因：" + ex.Message;
+            warn.Text = "错误原因：" + ex.Message;
         }
         finally
         {
