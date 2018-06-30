@@ -55,7 +55,7 @@ public partial class u_student_Apply : System.Web.UI.Page
     void bindgrid()
     {
 
-        GridView1.DataSource = DBManager.Query("select * from workinfo");
+        GridView1.DataSource = DBManager.Query("select * from workinfo where applytimebe<'"+DateTime.Now.Date+"' and applytimefi>'"+DateTime.Now.Date+"'");
         GridView1.DataBind();
 
     }
