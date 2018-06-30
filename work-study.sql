@@ -1,4 +1,4 @@
-﻿/*
+/*
  Navicat Premium Data Transfer
 
  Source Server         : sqlserver_l
@@ -12,7 +12,7 @@
  Target Server Version : 14001000
  File Encoding         : 65001
 
- Date: 28/06/2018 17:54:40
+ Date: 30/06/2018 17:42:11
 */
 
 
@@ -61,19 +61,6 @@ EXEC sp_addextendedproperty
 'SCHEMA', N'dbo',
 'TABLE', N'Apply',
 'COLUMN', N'PostId'
-GO
-
-
--- ----------------------------
--- Records of [Apply]
--- ----------------------------
-BEGIN TRANSACTION
-GO
-
-INSERT INTO [dbo].[Apply]  VALUES (N'1511240142010120180613', N'     ', N'2018-06-13', N'1511240142', N'0101  ')
-GO
-
-COMMIT
 GO
 
 
@@ -326,19 +313,6 @@ GO
 
 
 -- ----------------------------
--- Records of [SHInfo]
--- ----------------------------
-BEGIN TRANSACTION
-GO
-
-INSERT INTO [dbo].[SHInfo]  VALUES (N'1511240142010120180613', N'的风格    ', N'2018-06-28 17:02:40.600', N'通过')
-GO
-
-COMMIT
-GO
-
-
--- ----------------------------
 -- Table structure for Student
 -- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Student]') AND type IN ('U'))
@@ -382,7 +356,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[Student]  VALUES (N'1511240142', N'阿斯弗', N'男', N'2017-12-01', N'中dfgd', N'2358273592130485392', N'信管151', N'数信', N'234445 '), (N'1511240143', N'qx', N'男', N'2018-06-19', N'中国银11', N'2358273592130485392', N'5667', N'5677', N'343545 '), (N'1511240145', N'dgr   ', N'女', N'2018-06-02', N'中国银112', N'2358273592130485392', N'543', N'345', N'555345 '), (N'1511240147', N'rrrt  ', N'男', N'2018-06-14', N'中国银112', N'2358273592130485392', N'5346', N'6666', N'234235 ')
+INSERT INTO [dbo].[Student]  VALUES (N'1511240142', N'阿斯弗', N'男', N'2017-12-01', N'中dfgd', N'2358273592130485392', N'信管151', N'数学与信息科学学院', N'234445 '), (N'1511240143', N'qx', N'男', N'2018-06-19', N'中国银11', N'2358273592130485392', N'5667', N'数学与信息科学学院', N'343545 '), (N'1511240145', N'dgr   ', N'女', N'2018-06-02', N'中国银112', N'2358273592130485392', N'543', N'数学与信息科学学院', N'555345 '), (N'1511240147', N'rrrt  ', N'男', N'2018-06-14', N'中国银112', N'2358273592130485392', N'5346', N'数学与信息科学学院', N'234235 ')
 GO
 
 COMMIT
@@ -420,7 +394,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[StuFreeTime]  VALUES (N'1511240142', N'11', N'151124014211'), (N'1511240142', N'12', N'151124014212'), (N'1511240142', N'23', N'151124014223'), (N'1511240142', N'33', N'151124014233'), (N'1511240143', N'11', N'151124014311'), (N'1511240143', N'12', N'151124014312'), (N'1511240143', N'23', N'151124014323'), (N'1511240143', N'33', N'151124014333')
+INSERT INTO [dbo].[StuFreeTime]  VALUES (N'1511240143', N'11', N'151124014311'), (N'1511240143', N'12', N'151124014312'), (N'1511240143', N'23', N'151124014323'), (N'1511240143', N'33', N'151124014333')
 GO
 
 COMMIT
@@ -481,7 +455,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[Time]  VALUES (N'11', N'星期一', N'08:00:00.0', N'10:30:00.0', N'2.0'), (N'12', N'星期一', N'09:00:00.0', N'10:40:00.0', N'1.7'), (N'23', N'星期二', N'10:22:10.0', N'13:22:12.0', N'3.0'), (N'33', N'星期三', N'10:22:57.0', N'15:23:00.0', N'5.0')
+INSERT INTO [dbo].[Time]  VALUES (N'11', N'星期一', N'08:00:00.0', N'10:30:00.0', N'2.0'), (N'12', N'星期一', N'09:00:00.0', N'10:40:00.0', N'1.7'), (N'13', N'星期一', N'09:00:00.0', N'12:00:00.0', N'3.0'), (N'23', N'星期二', N'10:22:10.0', N'13:22:12.0', N'3.0'), (N'33', N'星期三', N'10:22:57.0', N'15:23:00.0', N'5.0')
 GO
 
 COMMIT
@@ -527,7 +501,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[User]  VALUES (N'1511240143', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N'e1', N'e10adc3949ba59abbe56e057f20f883e', N'用人单位', NULL), (N's1', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N't1', N'e10adc3949ba59abbe56e057f20f883e', N'学工组', NULL), (N'z1', N'e10adc3949ba59abbe56e057f20f883e', N'资助中心', NULL)
+INSERT INTO [dbo].[User]  VALUES (N'1511240143', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N'e1', N'e10adc3949ba59abbe56e057f20f883e', N'用人单位', N'西苑'), (N's1', N'e10adc3949ba59abbe56e057f20f883e', N'学生', NULL), (N't1', N'e10adc3949ba59abbe56e057f20f883e', N'学工组', N'数信'), (N'z1', N'e10adc3949ba59abbe56e057f20f883e', N'资助中心', N''), (N'z2', N'e10adc3949ba59abbe56e057f20f883e', N'资助中心', N'')
 GO
 
 COMMIT
@@ -606,7 +580,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[WorkCheck]  VALUES (N'151124014201012320180309', N'1511240145', N'0101', N'23', N'2018-06-24 20:31:27.330', NULL, NULL, NULL, N'2018-05-15'), (N'151124014201012320180310', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-05-22'), (N'151124014201012320180311', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-05-29'), (N'151124014201012320180312', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-05'), (N'151124014201012320180313', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-12'), (N'151124014201012320180314', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-19'), (N'151124014201012320180315', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-26'), (N'151124014201012320180316', N'1511240147', N'0101', N'23', N'2018-06-24 20:31:34.817', NULL, NULL, NULL, N'2018-07-03'), (N'151124014201012320180317', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-10'), (N'151124014201012320180318', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-17'), (N'151124014201012320180319', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-24'), (N'151124014201012320180320', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-31'), (N'151124014201012320180321', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-07'), (N'151124014201012320180322', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-14'), (N'151124014201012320180323', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-21'), (N'151124014201012320180324', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-28'), (N'151124014201012320180326', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-11'), (N'151124014201012320180327', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-18'), (N'151124014201012320180328', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-25'), (N'151124014201012320180329', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-10-02'), (N'66                      ', N'1511240142', N'0101', N'11', N'2018-06-12 00:00:00.000', NULL, NULL, NULL, N'2018-05-12')
+INSERT INTO [dbo].[WorkCheck]  VALUES (N'151124014201012320180309', N'1511240145', N'0101', N'23', N'2018-06-30 10:41:10.163', N'1', N'0', NULL, N'2018-05-15'), (N'151124014201012320180310', N'1511240142', N'0101', N'23', N'2018-06-30 10:41:13.243', N'1', N'1', NULL, N'2018-05-22'), (N'151124014201012320180311', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-05-29'), (N'151124014201012320180312', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-05'), (N'151124014201012320180313', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-12'), (N'151124014201012320180314', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-06-19'), (N'151124014201012320180315', N'1511240142', N'0101', N'23', N'2018-06-30 10:41:17.270', N'1', N'1', NULL, N'2018-06-26'), (N'151124014201012320180316', N'1511240147', N'0101', N'23', N'2018-06-24 20:31:34.817', NULL, NULL, NULL, N'2018-07-03'), (N'151124014201012320180317', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-10'), (N'151124014201012320180318', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-17'), (N'151124014201012320180319', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-24'), (N'151124014201012320180320', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-07-31'), (N'151124014201012320180321', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-07'), (N'151124014201012320180322', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-14'), (N'151124014201012320180323', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-21'), (N'151124014201012320180324', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-08-28'), (N'151124014201012320180326', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-11'), (N'151124014201012320180327', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-18'), (N'151124014201012320180328', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-09-25'), (N'151124014201012320180329', N'1511240142', N'0101', N'23', NULL, NULL, NULL, NULL, N'2018-10-02')
 GO
 
 COMMIT
@@ -717,7 +691,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[WorkInfo]  VALUES (N'0101', N'洗碗', N'西苑', N'12.00', N'男', N'西苑', N'', N'2.00', N'开始加快分解', N'2018-06-02', N'2018-06-28', N'1', NULL)
+INSERT INTO [dbo].[WorkInfo]  VALUES (N'0101', N'洗碗', N'西苑', N'12.00', N'男', N'西苑', N'大一,大二,大三,大四', N'2.00', N'开始加快分解', N'1900-01-01', N'1998-01-01', N'1', NULL), (N'0102', N'扫地', N'西苑', N'11.00', N'男', N'西苑', N'大二', N'1.00', N'但人感染登革热打广告的如果的如果但如果', N'2018-06-01', N'2018-09-28', N'4', NULL), (N'0103', N'切菜', N'西苑', N'11.00', N'男', N'西苑', N'大一,大二', N'1.00', N'但人感染登革热打广告的如果的如果但如果而隔热隔热隔热特瑞特瑞特瑞特他', N'2018-06-28', N'2018-09-28', N'4', NULL), (N'0104', N'345', N'55', N'12.00', N'男', N'西苑', N'大二', N'1.00', N'tertert', N'1900-01-01', N'2019-01-01', N'0', NULL), (N'0105', N'行政', N'西苑', N'9.00', N'女', N'西苑', N'大一', N'2.00', N'整理资料、帮忙送材料', N'2018-06-13', N'2018-07-13', N'2', NULL)
 GO
 
 COMMIT
@@ -755,7 +729,7 @@ GO
 BEGIN TRANSACTION
 GO
 
-INSERT INTO [dbo].[WorkReqTime]  VALUES (N'0101', N'23', N'010123  ')
+INSERT INTO [dbo].[WorkReqTime]  VALUES (N'0102', N'12', N'010212  '), (N'0104', N'11', N'010411  '), (N'0104', N'12', N'010412  '), (N'0105', N'12', N'010512  ')
 GO
 
 COMMIT
@@ -814,13 +788,9 @@ AS
 BEGIN
 	-- routine body goes here, e.g.
 	-- SELECT 'Navicat for SQL Server'
-	DECLARE @newid char(4),@newint int,@tem char(2)
-	set @newint= (SELECT top 1 right(PostId,2) from WorkInfo WHERE BelongUnit=@BelongUnit ORDER BY PostId DESC)+1
-	SELECT @newint as 'int'
-	if(@newint<10)set @tem='0'+CONVERT(char,@newint)
-	else set @tem=CONVERT(char(2),@newint)
-	set @newid=(SELECT EmployerId from Employer WHERE EmployerName=@BelongUnit)+@tem
-	select @tem 'tem'
+	DECLARE @newid char(4)
+	set @newid=dbo.newpostid(@BelongUnit)
+	if not EXISTS(SELECT post from WorkInfo where post=@Post)
 	insert into workinfo values(@newid,@post,@workplace,@hourlywage,@genderreq,@belongunit,@gradereq,@lossforabsence,@jobdescription,@applytimefi,@applytimefi,@peonumberdemand,null)
 END
 GO
@@ -902,6 +872,60 @@ GO
 
 
 -- ----------------------------
+-- Function structure for newpostid
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[newpostid]') AND type IN ('FN', 'FS', 'FT', 'IF', 'TF'))
+	DROP FUNCTION[dbo].[newpostid]
+GO
+
+CREATE FUNCTION [dbo].[newpostid]
+(
+ @BelongUnit as VARCHAR(20)
+)
+RETURNS char(4) -- nvarchar
+AS
+BEGIN
+	DECLARE @newid char(4),@newint int,@tem char(2)
+	set @newint= (SELECT top 1 right(PostId,2) from WorkInfo WHERE BelongUnit=@BelongUnit ORDER BY PostId DESC)+1
+	if(@newint<10)set @tem='0'+CONVERT(char,@newint)
+	else set @tem=CONVERT(char(2),@newint)
+	set @newid=(SELECT EmployerId from Employer WHERE EmployerName=@BelongUnit)+@tem
+	RETURN @newid
+END
+GO
+
+
+-- ----------------------------
+-- Procedure structure for addtime
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[addtime]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[addtime]
+GO
+
+CREATE PROCEDURE [dbo].[addtime]
+  @WhatDay AS char(6) ,
+  @StartTime AS time ,
+  @EndTime AS time 
+AS
+BEGIN
+	-- routine body goes here, e.g.
+	-- SELECT 'Navicat for SQL Server'
+	DECLARE @fc char,@sc char,@newtid char(2)
+	if @WhatDay='星期一' set @fc='1'
+	if @WhatDay='星期二' set @fc='2'
+	if @WhatDay='星期三' set @fc='3'
+	if @WhatDay='星期四' set @fc='4'
+	if @WhatDay='星期五' set @fc='5'
+	if @WhatDay='星期六' set @fc='6'
+	if @WhatDay='星期日' set @fc='7'
+	set @sc=(SELECT top 1 right(tid,1) from time WHERE left(tid,1)=@fc ORDER BY right(tid,1) desc)+1
+	set @newtid=@fc+@sc
+	insert into time(tid,WhatDay,StartTime,EndTime)VALUES(@newtid,@WhatDay,@StartTime,@EndTime)
+END
+GO
+
+
+-- ----------------------------
 -- Procedure structure for arrangeWork
 -- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[arrangeWork]') AND type IN ('P', 'PC', 'RF', 'X'))
@@ -974,7 +998,7 @@ AS
 BEGIN
   -- Type the SQL Here.
 	if((SELECT count(*) from inserted)>0)
-	INSERT into SHInfo VALUES((SELECT ApplyId from inserted),null,null,null)
+	INSERT into SHInfo VALUES((SELECT ApplyId from inserted),null,null,'待审核')
 	if((SELECT count(*) from deleted)>0)
 	DELETE from SHInfo WHERE ApplyId=(SELECT ApplyId from inserted)
 END
@@ -1172,7 +1196,7 @@ GO
 -- ----------------------------
 -- Checks structure for table WorkInfo
 -- ----------------------------
-ALTER TABLE [dbo].[WorkInfo] ADD CONSTRAINT [SexCheck] CHECK ([GenderReq]='男' OR [GenderReq]='女')
+ALTER TABLE [dbo].[WorkInfo] ADD CONSTRAINT [SexCheck] CHECK ([GenderReq]='男' OR [GenderReq]='女' OR [genderreq]='')
 GO
 
 
@@ -1223,7 +1247,7 @@ GO
 -- ----------------------------
 -- Foreign Keys structure for table SHInfo
 -- ----------------------------
-ALTER TABLE [dbo].[SHInfo] ADD CONSTRAINT [FK__SHInfo__ApplyId__245D67DE] FOREIGN KEY ([ApplyId]) REFERENCES [Apply] ([ApplyId]) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE [dbo].[SHInfo] ADD CONSTRAINT [FK__SHInfo__ApplyId__245D67DE] FOREIGN KEY ([ApplyId]) REFERENCES [Apply] ([ApplyId]) ON DELETE CASCADE ON UPDATE NO ACTION
 GO
 
 
@@ -1266,4 +1290,3 @@ GO
 ALTER TABLE [dbo].[WorkReqTime] ADD CONSTRAINT [FK__WorkReqTime__TId__32AB8735] FOREIGN KEY ([TId]) REFERENCES [Time] ([TId]) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
---cgc test
