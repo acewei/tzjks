@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/u_fmc/MainForFMC.master" AutoEventWireup="true" CodeFile="Time.aspx.cs" Inherits="u_fmc_Time" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/u_fmc/MainForFMC.master" AutoEventWireup="true" CodeFile="Time.aspx.cs" EnableEventValidation="false" Inherits="u_fmc_Time" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <style>
@@ -18,10 +18,7 @@
         .auto-style7 {
             width: 907px;
         }
-        .auto-style8 {
-            width: 318px;
-        }
-    </style>
+        </style>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <fieldset style="width:300px;">
@@ -43,10 +40,10 @@
             DataKeyNames="TId" 
             AllowPaging="True" 
             OnPageIndexChanging="GridView1_PageIndexChanging" 
-            AllowSorting="True" 
+            AllowSorting="True"            
             OnRowDataBound="GridView1_RowDataBound"
-            CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None"
-            >
+            PageSize="10"
+            CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None">
    
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -55,8 +52,7 @@
                 <asp:BoundField DataField="StartTime" HeaderText="开始时间" />
                 <asp:BoundField DataField="EndTime" HeaderText="结束时间" />
                 <asp:BoundField DataField="TimeLength" HeaderText="时长" />
-                <asp:TemplateField ShowHeader="False">
-                </asp:TemplateField>
+
                 <asp:CommandField InsertVisible="false" ShowEditButton="True" />
                 <asp:TemplateField HeaderText="操作" ShowHeader="False">
                     <ItemTemplate>
@@ -166,11 +162,12 @@
              星期日
          </asp:ListItem>
      </asp:DropDownList></td> 
+     </td> 
      </tr>
      <tr>
      <td style="width: 400px; text-align: right">  开始时间：</td>
      <td class="auto-style6">
-     <asp:TextBox ID="TextBox3" runat="server" Width="230px" TextMode="Time"></asp:TextBox></td> 
+     <asp:TextBox ID="TextBox3" runat="server" Width="230px" TextMode="Time" ></asp:TextBox></td> 
      </tr>
      <tr>
      <td style="width: 400px; text-align: right"> 结束时间：</td>

@@ -53,7 +53,7 @@ public partial class u_fmc_Time : System.Web.UI.Page
         SqlConnection sqlconn = new SqlConnection(sqlconnstr);
         sqlconn.Open();
         //删除行处理
-        String sql = "delete from [User] where TId='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
+        String sql = "delete from Time where TId='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
         SqlCommand Comm = new SqlCommand(sql, sqlconn);
         Comm.ExecuteNonQuery();
         sqlconn.Close();
@@ -61,7 +61,6 @@ public partial class u_fmc_Time : System.Web.UI.Page
         Comm = null;
         GridView1.EditIndex = -1;
         bindgrid();
-
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -102,12 +101,11 @@ public partial class u_fmc_Time : System.Web.UI.Page
         SqlCommand sqlcommand = new SqlCommand();
         sqlcommand.Connection = sqlconn;
         //把SQL语句赋给Command对象
-        sqlcommand.CommandText = "insert into Time(TId,WhatDay,StartTime,EndTime,TimeLength)values (@TId,@WhatDay,@StartTime,@EndTime,@TimeLength)";
+        sqlcommand.CommandText = "insert into Time(TId,WhatDay,StartTime,EndTime)values (@TId,@WhatDay,@StartTime,@EndTime)";
         sqlcommand.Parameters.AddWithValue("@TId", TextBox1.Text);
-        sqlcommand.Parameters.AddWithValue("@WhatDay", TextBox2.SelectedValue);
+        sqlcommand.Parameters.AddWithValue("@WhatDay", TextBox2.Text.Trim());
         sqlcommand.Parameters.AddWithValue("@StartTime", TextBox3.Text);
         sqlcommand.Parameters.AddWithValue("@EndTime", TextBox4.Text);
-        sqlcommand.Parameters.AddWithValue("@TimeLength", TextBox4.Text);
         try
         {
             //打开连接
@@ -132,7 +130,6 @@ public partial class u_fmc_Time : System.Web.UI.Page
             GridView1.EditIndex = -1;
             bindgrid();
         }
-
     }
 
     protected void Button2_Click(object sender, EventArgs e)
@@ -140,8 +137,7 @@ public partial class u_fmc_Time : System.Web.UI.Page
         TextBox1.Text = String.Empty;
         TextBox2.Text = String.Empty;
         TextBox3.Text = String.Empty;
-        TextBox4.Text = String.Empty;
-        
+        TextBox4.Text = String.Empty;       
     }
 
     /// <summary>
@@ -243,8 +239,6 @@ public partial class u_fmc_Time : System.Web.UI.Page
         GridView1.EditIndex = -1;
         bindgrid();
         #endregion
-
-
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -269,8 +263,6 @@ public partial class u_fmc_Time : System.Web.UI.Page
         //    int id = e.Row.RowIndex + 1;
         //     e.Row.Cells[0].Text = id.ToString();
         // }
-
-
     }
     /// <summary>
     /// 导出Excel功能
@@ -370,7 +362,6 @@ public partial class u_fmc_Time : System.Web.UI.Page
         }
         GridView1.DataSource = ds.Tables["tabTime"].DefaultView;
         GridView1.DataBind();
-
     }
 
 }

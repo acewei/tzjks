@@ -126,7 +126,7 @@
                     <tr>
                         <td class="auto-style5" style="font-size: 55px; font-weight: 900; font-style: italic">勤工助学管理系统</td>
                         <td class="auto-style4">&nbsp;</td>
-                        <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp<%=Session["username"] %>
+                        <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;欢迎,<%=Session["userid"] %> &nbsp;<%=Session["username"] %>
                             &nbsp;&nbsp;
                   <asp:Button ID="zhuxiao" class="btn btn-danger" data-loading-text="注销"
                       type="button" runat="server" Text="注销" Style="font-size: large" OnClick="zhuxiao_Click" />
@@ -144,31 +144,31 @@
                            
 
 
-                            <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" NodeIndent="15" ShowLines="True" Font-Bold="True" Font-Names="黑体" Font-Size="Large" Font-Strikeout="False" ForeColor="Black" Height="147px" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
+                            <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" NodeIndent="15" Font-Bold="True" Font-Names="黑体" Font-Size="Large" Font-Strikeout="False" ForeColor="Black" Height="147px" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
                                 <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
 
                                 <LevelStyles>
                                     <asp:TreeNodeStyle Font-Size="26px" />
                                 </LevelStyles>
                                 <Nodes>
-                                    <asp:TreeNode Text="考勤查询" Value="考勤查询" NavigateUrl="~/u_fmc/AttendanceQuery.aspx">
-                                    </asp:TreeNode>
                                     <asp:TreeNode Text="用人单位管理" Value="用人单位管理">
                                         <asp:TreeNode NavigateUrl="~/u_fmc/EmployerInfoMaintain.aspx" Text="用人单位信息管理" Value="用人单位信息管理"></asp:TreeNode>
                                         <asp:TreeNode NavigateUrl="~/u_fmc/WorkInfoMaintain.aspx" Text="岗位信息管理" Value="岗位信息管理"></asp:TreeNode>
                                     </asp:TreeNode>
                                     <asp:TreeNode NavigateUrl="~/u_fmc/StuInfoMaintain.aspx" Text="学生信息管理" Value="学生信息管理"></asp:TreeNode>
                                     <asp:TreeNode NavigateUrl="~/u_fmc/UserInfoMaintain.aspx" Text="用户管理" Value="用户管理"></asp:TreeNode>
-                                    <asp:TreeNode NavigateUrl="~/u_fmc/SysInit.aspx" Text="系统初始化" Value="系统初始化"></asp:TreeNode>
-                                    <asp:TreeNode NavigateUrl="~/u_fmc/DataBackRestore.aspx" Text="数据备份与恢复" Value="数据备份与恢复"></asp:TreeNode>
-                                    <asp:TreeNode NavigateUrl="~/u_fmc/AboutSys.aspx" Text="关于系统" Value="关于系统"></asp:TreeNode>
-                                    <asp:TreeNode NavigateUrl="~/u_fmc/Dismissal.aspx" Text="撤职" Value="撤职"></asp:TreeNode>
-                                    <asp:TreeNode NavigateUrl="~/u_fmc/CountSalary.aspx" Text="结算工资" Value="结算工资"></asp:TreeNode>
                                     <asp:TreeNode NavigateUrl="~/u_fmc/Time.aspx" Text="时间管理" Value="时间管理"></asp:TreeNode>
+                                    <asp:TreeNode Text="考勤查询" Value="考勤查询" NavigateUrl="~/u_fmc/AttendanceQuery.aspx">
+                                    </asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/CountSalary.aspx" Text="结算工资" Value="结算工资"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/Dismissal.aspx" Text="撤职" Value="撤职"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/DataBackRestore.aspx" Text="数据备份与恢复" Value="数据备份与恢复"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/SysInit.aspx" Text="系统初始化" Value="系统初始化"></asp:TreeNode>
+                                    <asp:TreeNode NavigateUrl="~/u_fmc/AboutSys.aspx" Text="关于系统" Value="关于系统"></asp:TreeNode>
                                 </Nodes>
-                                <NodeStyle Font-Names="Tahoma" Font-Size="Small" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
-                                <ParentNodeStyle Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" ForeColor="#000066" />
-                                <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" BorderStyle="Double" />
+                                <NodeStyle Font-Names="Tahoma" Font-Size="8pt" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
+                                <ParentNodeStyle Font-Bold="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" />
+                                <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" />
                             </asp:TreeView>
                        
                 </div>
