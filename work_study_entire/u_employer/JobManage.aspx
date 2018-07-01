@@ -64,7 +64,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="开始申请时间">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" TextMode="Date" runat="server" Text='<%# Bind("applytimebe") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox4"  TextMode="Date" runat="server" Text='<%# Bind("applytimebe") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("applytimebe") %>'></asp:Label>
@@ -72,7 +72,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="结束申请时间">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox5" runat="server" TextMode="Date" Text='<%# Bind("applytimefi") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox5"  TextMode="Date" runat="server" Text='<%# Bind("applytimefi") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("applytimefi") %>'></asp:Label>

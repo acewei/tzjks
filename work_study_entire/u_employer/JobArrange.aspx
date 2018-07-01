@@ -75,13 +75,12 @@
     
     
 
-
             <div class="btn btn-primary" style="padding:0px;margin:20px">
                 <asp:Button ID="Button2" OnClick="Button2_Click" runat="server" Text="导出工作安排表" />
             </div>
             
-        
-    
+    <asp:Label ID="warn" runat="server" Text=""></asp:Label>
+   
             <div class="container">
                 
                 <div class="row clearfix">
