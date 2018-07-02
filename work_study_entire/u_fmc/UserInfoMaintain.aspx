@@ -29,7 +29,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <fieldset style="width: 300px;">
-                <legend class="text-center text-primary">岗位信息管理</legend>
+                <legend class="text-center text-primary">用户信息管理</legend>
 
                 <div id="first" class="auto-style7">
 

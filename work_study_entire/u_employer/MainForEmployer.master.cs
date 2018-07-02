@@ -9,7 +9,11 @@ public partial class EmployerMgr : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //this.loginname.Text = "当前登录管理员：" + Request.Cookies["UserName"].Value.ToString() + "，欢迎您！";
+        if (Session["username"] == null || Session["userid"].ToString() != "用人单位")
+        {
+            Session.Clear();
+            Response.Redirect("~/login.aspx");
+        }
     }
     protected void zhuxiao_Click(object sender, EventArgs e)
     {

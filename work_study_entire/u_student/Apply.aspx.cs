@@ -10,9 +10,10 @@ public partial class u_student_Apply : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        
         if (!Page.IsPostBack)
         {
+            
             bindstatus();
             if (DetailsView1.DataItemCount == 0)
             {
@@ -40,7 +41,7 @@ public partial class u_student_Apply : System.Web.UI.Page
     void bindgrid()
     {
 
-        GridView1.DataSource = DBManager.Query("select * from workinfo where applytimebe<'"+DateTime.Now.Date+"' and applytimefi>'"+DateTime.Now.Date+"'");
+        GridView1.DataSource = DBManager.Query("select * from workinfo where applytimebe<'"+DateTime.Now.Date+"' and applytimefi>'"+DateTime.Now.Date+"' and isconfirm=1");
         GridView1.DataBind();
 
     }
@@ -198,9 +199,10 @@ public partial class u_student_Apply : System.Web.UI.Page
     protected void applystatus_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         
-        string applyid = applystatus.DataKeys[e.RowIndex].Value.ToString();
-        
-        DBManager.Nonquery("delete from apply where applyid='"+applyid+"'");
-        bindstatus();
+            string applyid = applystatus.DataKeys[e.RowIndex].Value.ToString();
+
+            DBManager.Nonquery("delete from apply where applyid='" + applyid + "'");
+            bindstatus();
+      
     }
 }

@@ -13,9 +13,9 @@
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    时间:<asp:TextBox ID="t1" runat="server"></asp:TextBox>
+                    时间:<asp:TextBox ID="t1" runat="server" TextMode="Date"></asp:TextBox>
                     &nbsp;到&nbsp;
-                  <asp:TextBox ID="t2" runat="server"></asp:TextBox>
+                  <asp:TextBox ID="t2" runat="server" TextMode="Date"></asp:TextBox>
                     &nbsp;
              
                 <asp:Button ID="Button3" style="margin-left:15px" class="btn btn-primary"  data-loading-text="导出"
@@ -30,7 +30,7 @@
             &nbsp;
         </asp:Panel>
         <asp:Panel ID="Panel2" runat="server">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnDataBinding="GridView1_DataBinding" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" PageSize="15">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 
             <Columns>
