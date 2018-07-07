@@ -30,6 +30,7 @@
                 <asp:BoundField DataField="SId" HeaderText="学号" />
                 <asp:BoundField DataField="PostId" HeaderText="岗位号" />
                 <asp:BoundField DataField="EmployerId" HeaderText="所属单位编号" />
+                <asp:BoundField DataField="bcid" HeaderText="银行卡号" />
                 <asp:BoundField DataField="RealTotalHour" HeaderText="实际工时" />
                 <asp:BoundField DataField="ShouldHour" HeaderText="应做工时" />
                 <asp:BoundField DataField="LossHour" HeaderText="缺勤时长" />

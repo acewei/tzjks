@@ -40,7 +40,7 @@ public partial class u_employer_ApplyReview : System.Web.UI.Page
     }
     void bindgrid()
     {
-        GridView1.DataSource = DBManager.Query("select apply.applyid,sname,post,reviewresult,reviewtime,reviewer from student,apply,shinfo,workinfo where apply.applyid=shinfo.applyid and student.sid=apply.sid and workinfo.postid=apply.postid");
+        GridView1.DataSource = DBManager.Query("select apply.applyid,sname,post,reviewresult,reviewtime,reviewer from student,apply,shinfo,workinfo,employer where left(workinfo.postid,2)=employer.employerid and apply.applyid=shinfo.applyid and student.sid=apply.sid and workinfo.postid=apply.postid and employername='"+Session["remark"]+"'");
         GridView1.DataBind();
     }
 

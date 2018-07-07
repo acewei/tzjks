@@ -23,6 +23,7 @@
                         <asp:TemplateField HeaderText="性别要求">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="xb" runat="server">
+                                    <asp:ListItem>无</asp:ListItem>
                                     <asp:ListItem>男</asp:ListItem>
                                     <asp:ListItem>女</asp:ListItem>
                                 </asp:DropDownList>
@@ -166,9 +167,10 @@
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:DropDownList ID="genderreq1" runat="server">
+                                                        <asp:ListItem>无</asp:ListItem>
                                                         <asp:ListItem>男</asp:ListItem>
                                                         <asp:ListItem>女</asp:ListItem>
-                                                        <asp:ListItem></asp:ListItem>
+                                                        
                                                     </asp:DropDownList>
                                                 </asp:TableCell>
                                             </asp:TableRow>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="User">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAAAAAAAABAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>App_Code\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkInfo">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAAAAAAAABAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>App_Code\WorkInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBManager">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAAAAQ=</HashCode>
+      <FileName>App_Code\DBManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

@@ -18,7 +18,7 @@ public partial class _Default : System.Web.UI.Page
         {
             
             bindgrid();
-            DropDownList2.DataSource = DBManager.Query("select institute from student");
+            DropDownList2.DataSource = DBManager.Query("select distinct institute from student");
             DropDownList2.DataTextField = "institute";
             DropDownList2.DataBind();
         }

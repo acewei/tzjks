@@ -10,7 +10,7 @@ public partial class u_student_Apply : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Session["username"] == null) Response.Redirect("~/login.aspx");
         if (!Page.IsPostBack)
         {
             
@@ -128,7 +128,7 @@ public partial class u_student_Apply : System.Web.UI.Page
             }
         }
         if (fl >= 1) suittime = true;
-        if (GridView1.Rows[GridView1.SelectedIndex].Cells[4].Text == DBManager.Query("select ssex from student where sid='" + Label1.Text + "'").Tables[0].Rows[0][0].ToString()) suitsex = true;
+        if (GridView1.Rows[GridView1.SelectedIndex].Cells[4].Text == DBManager.Query("select ssex from student where sid='" + Label1.Text + "'").Tables[0].Rows[0][0].ToString()|| GridView1.Rows[GridView1.SelectedIndex].Cells[4].Text=="无") suitsex = true;
 
         if (suittime)
         {
