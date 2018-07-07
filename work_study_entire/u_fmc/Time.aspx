@@ -42,8 +42,7 @@
             OnPageIndexChanging="GridView1_PageIndexChanging" 
             AllowSorting="True"            
             OnRowDataBound="GridView1_RowDataBound"
-            PageSize="10"
-            CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None">
+            CssClass="GridViewStyle" BackColor="White" BorderColor="#DEDFDE" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None" ForeColor="Black" GridLines="Vertical">
    
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -60,12 +59,11 @@
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" ForeColor="#003399" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="#CCCCFF" />
-            <PagerStyle BackColor="#2461BF" ForeColor="#003399" HorizontalAlign="Left" />
-            <RowStyle BackColor="#EFF3FB" ForeColor="#003399" />
-            <SelectedRowStyle BackColor="#D1DDF1" ForeColor="#CCFF99" Font-Bold="True" />
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE" />
+            <SelectedRowStyle BackColor="#CE5D5A" ForeColor="White" Font-Bold="True" />
               <PagerTemplate>
                                     当前第:
                                      <%--//((GridView)Container.NamingContainer)就是为了得到当前的控件--%>
@@ -91,10 +89,10 @@
                                         CommandName="Page" Text="GO" ForeColor="#000066" />
               </PagerTemplate>
 
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
 
         </asp:GridView>
 
