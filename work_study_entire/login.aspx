@@ -7,6 +7,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
+         html,body{
+             width: 100%;
+             height: 100%;
+             margin: 0px;
+             padding: 0px;
+        }
+         .login{   
+            position: absolute;                
+            top: 50%;   
+            left: 50%;   
+            -webkit-transform: translate(-50%, -50%);   
+            -moz-transform: translate(-50%, -50%);   
+            -ms-transform: translate(-50%, -50%);   
+            -o-transform: translate(-50%, -50%);   
+            transform: translate(-50%, -50%);   
+        }        
         .auto-style2 {
             height: 44px;
         }
@@ -23,12 +39,15 @@
             height: 206px;
             width: 394px;
         }
+        .auto-style6 {
+            height: 60px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-
-        <asp:Login ID="Login1" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#333333" Height="206px" OnAuthenticate="Login1_Authenticate" Width="394px" DestinationPageUrl="default.aspx">
+        <div id="login" class="login">
+        <asp:Login ID="Login1" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#333333" Height="231px" OnAuthenticate="Login1_Authenticate" Width="390px" DestinationPageUrl="default.aspx">
             <InstructionTextStyle Font-Italic="True" ForeColor="Black" />
             <LayoutTemplate>
                 <table cellpadding="4" cellspacing="0" style="border-collapse: collapse;">
@@ -43,7 +62,7 @@
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">用户名:</asp:Label>
                                     </td>
                                     <td class="auto-style2">
-                                        <asp:TextBox ID="UserName" runat="server" Font-Size="0.8em"></asp:TextBox>
+                                        <asp:TextBox ID="UserName" runat="server" Font-Size="0.8em" Width="153px"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" EnableClientScript="False" ErrorMessage="必须填写“用户名”。" ToolTip="必须填写“用户名”。" ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
@@ -52,19 +71,18 @@
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">密码:</asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="Password" runat="server" Font-Size="0.8em" TextMode="Password"></asp:TextBox>
+                                        <asp:TextBox ID="Password" runat="server" Font-Size="0.8em" TextMode="Password" Width="154px"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" EnableClientScript="False" ErrorMessage="必须填写“密码”。" ToolTip="必须填写“密码”。" ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">&nbsp; &nbsp; &nbsp;
-                                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal">
+                                    <td colspan="2" class="auto-style6">&nbsp; &nbsp; &nbsp; <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal">
                                             <asp:ListItem>学生</asp:ListItem>
                                             <asp:ListItem>用人单位</asp:ListItem>
                                             <asp:ListItem>学工组</asp:ListItem>
                                             <asp:ListItem>资助中心</asp:ListItem>
                                         </asp:RadioButtonList>
-                                        <br />
+                                        &nbsp;<br />
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,7 +93,7 @@
                                 <tr>
                                     <td>
                                         <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/ChPasswd.aspx">修改密码</asp:LinkButton></td>
-                                    <td align="right" colspan="2">
+                                    <td align="right">
                                         <asp:Button ID="LoginButton" runat="server" BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CommandName="Login" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284775" Text="登录" ValidationGroup="Login1" />
                                     </td>
                                 </tr>
@@ -89,7 +107,7 @@
             <TitleTextStyle BackColor="#5D7B9D" Font-Bold="True" Font-Size="0.9em" ForeColor="White" />
 
         </asp:Login>
-
+        </div>
     </form>
 </body>
 </html>
