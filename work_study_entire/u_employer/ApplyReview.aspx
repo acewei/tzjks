@@ -8,6 +8,7 @@
             <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
             <asp:BoundField DataField="sname" HeaderText="学生姓名" />
             <asp:BoundField DataField="post" HeaderText="申请岗位" />
+            <asp:BoundField HeaderText="可安排时间" />
             <asp:TemplateField HeaderText="申请状态">
                 <EditItemTemplate>
                     <asp:DropDownList ID="DropDownList1" runat="server">
