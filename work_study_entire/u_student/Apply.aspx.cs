@@ -40,8 +40,16 @@ public partial class u_student_Apply : System.Web.UI.Page
     }
     void bindgrid()
     {
-
-        GridView1.DataSource = DBManager.Query("select * from workinfo where applytimebe<'"+DateTime.Now.Date+"' and applytimefi>'"+DateTime.Now.Date+"' and isconfirm=1");
+        string mygra="";
+        switch (Convert.ToInt32(Convert.ToInt32((DateTime.Now.Date - Convert.ToDateTime(DBManager.Query("select sey from student where sid='" + Session["username"] + "'").Tables[0].Rows[0][0])).Days) / 365))
+        {
+            case 0: mygra = "大一"; break;
+            case 1: mygra = "大二"; break;
+            case 2: mygra = "大三"; break;
+            case 4: mygra = "大四"; break;
+        }
+        string mysex= DBManager.Query("select ssex from student where sid='" + Session["username"].ToString() + "'").Tables[0].Rows[0][0].ToString();
+        GridView1.DataSource = DBManager.Query("select workinfo.* from workinfo where applytimebe<'"+DateTime.Now.Date+"' and applytimefi>'"+DateTime.Now.Date+"' and isconfirm=1 and (genderreq='"+mysex+ "' or genderreq='无') and gradereq like '%"+mygra+"%'");
         GridView1.DataBind();
 
     }
@@ -199,10 +207,13 @@ public partial class u_student_Apply : System.Web.UI.Page
     protected void applystatus_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         
+        if (applystatus.Rows[e.RowIndex].Cells[4].Text.Trim() != "通过")
+      
+        {
             string applyid = applystatus.DataKeys[e.RowIndex].Value.ToString();
 
             DBManager.Nonquery("delete from apply where applyid='" + applyid + "'");
             bindstatus();
-      
+        }
     }
 }

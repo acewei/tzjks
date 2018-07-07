@@ -43,11 +43,12 @@
                 </asp:BoundField>
                 <asp:TemplateField HeaderText="工作要求时间">
                     <ItemTemplate>
-                        <asp:GridView ID="GridView3" runat="server"></asp:GridView>
+                        <asp:GridView ID="GridView3" BorderStyle="None" BorderColor="#ffffff" runat="server"></asp:GridView>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Fields>
         </asp:DetailsView>
+       
         <br />
 
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -61,30 +62,20 @@
 
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
-
                 <asp:GridView ID="applystatus" runat="server" OnRowDeleting="applystatus_RowDeleting" AutoGenerateColumns="False" DataKeyNames="applyid">
                     <Columns>
                         <asp:BoundField DataField="applyid" HeaderText="申请编号" ReadOnly="True" />
                         <asp:BoundField DataField="post" HeaderText="申请岗位" />
                         <asp:BoundField DataField="belongunit" HeaderText="所属单位" />
                         <asp:BoundField DataField="applytime" HeaderText="申请时间" />
-                        <asp:TemplateField ItemStyle-ForeColor="Red" HeaderText="审核状态">
-                            <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList1" runat="server">
-                                    <asp:ListItem>通过</asp:ListItem>
-                                    <asp:ListItem>不通过</asp:ListItem>
-                                </asp:DropDownList>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("reviewresult") %>'></asp:Label>
-                            </ItemTemplate>
-                            <ItemStyle ForeColor="Red" />
-                        </asp:TemplateField>
+                        <asp:BoundField DataField="reviewresult" HeaderText="审核状态">
+                        <ItemStyle ForeColor="Red" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="reviewtime" HeaderText="审核时间" />
                         <asp:BoundField DataField="reviewer" HeaderText="审核人" />
                         <asp:TemplateField ShowHeader="False">
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="取消申请" OnClientClick="return confirm('确认取消此申请？(若完成审核，则删除记录)')"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="取消申请" OnClientClick="return confirm('确认取消？(审核通过无法删除)')"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
