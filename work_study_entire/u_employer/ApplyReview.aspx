@@ -26,6 +26,7 @@
             <asp:BoundField DataField="reviewtime" HeaderText="审核时间" />
             <asp:BoundField DataField="reviewer" HeaderText="审核人" />
             <asp:CommandField HeaderText="操作" ShowEditButton="True" />
+            <asp:CommandField ShowSelectButton="True" />
         </Columns>
         <FooterStyle BackColor="#CCCC99" />
         <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
@@ -62,5 +63,6 @@
               </PagerTemplate>
 
     </asp:GridView>
+    该生所申请该岗位可安排时间如下：<asp:GridView ID="GridView2" runat="server"></asp:GridView>
 </asp:Content>
 

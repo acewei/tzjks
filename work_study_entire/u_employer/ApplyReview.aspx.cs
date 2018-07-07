@@ -44,6 +44,8 @@ public partial class u_employer_ApplyReview : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
+        GridView2.DataSource = DBManager.Query("select time.* from stufreetime,workreqtime,workinfo,student,time where stufreetime.tid=time.tid and stufreetime.tid=workreqtime.tid and workreqtime.postid=workinfo.postid and stufreetime.sid=student.sid and student.sname='" + GridView1.Rows[GridView1.SelectedIndex].Cells[1].Text.Trim() + "' and workinfo.post='" + GridView1.Rows[GridView1.SelectedIndex].Cells[2].Text.Trim() + "' ");
+        GridView2.DataBind();
 
     }
 
