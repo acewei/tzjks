@@ -14,7 +14,7 @@
             <ContentTemplate>
 
 
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="postid" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging">
                     <Columns>
                         <asp:BoundField DataField="postid" HeaderText="岗位编号" />
                         <asp:BoundField DataField="post" HeaderText="岗位名" />
@@ -23,6 +23,7 @@
                         <asp:TemplateField HeaderText="性别要求">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="xb" runat="server">
+                                    <asp:ListItem>无</asp:ListItem>
                                     <asp:ListItem>男</asp:ListItem>
                                     <asp:ListItem>女</asp:ListItem>
                                 </asp:DropDownList>
@@ -82,17 +83,14 @@
                         <asp:CommandField ShowDeleteButton="True" />
                         <asp:CommandField ShowSelectButton="True" />
                     </Columns>
+                    <PagerSettings FirstPageText="第一页" LastPageText="最后一页" Mode="NextPreviousFirstLast" NextPageText="下一页" PreviousPageText="上一页" />
                 </asp:GridView>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-        <ContentTemplate>
-
-
-            <asp:Label ID="warn" runat="server" Text="Label"></asp:Label>
-        </ContentTemplate>
     </asp:UpdatePanel>
+
     <div>
         查看时间要求详情：
         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -166,9 +164,10 @@
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:DropDownList ID="genderreq1" runat="server">
+                                                        <asp:ListItem>无</asp:ListItem>
                                                         <asp:ListItem>男</asp:ListItem>
                                                         <asp:ListItem>女</asp:ListItem>
-                                                        <asp:ListItem></asp:ListItem>
+                                                        
                                                     </asp:DropDownList>
                                                 </asp:TableCell>
                                             </asp:TableRow>

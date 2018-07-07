@@ -153,6 +153,7 @@
      <td style="width: 100px; text-align: right">  学生性别：</td>
      <td class="auto-style6">
      <asp:DropDownList ID="TextBox3" runat="server">
+        
          <asp:ListItem>男</asp:ListItem>
          <asp:ListItem>女</asp:ListItem>
      </asp:DropDownList></td> 

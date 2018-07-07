@@ -77,7 +77,7 @@ public partial class u_employer_JobManage : System.Web.UI.Page
         }
         catch (Exception aa)
         {
-            warn.Text = aa.ToString();
+          
         }
     }
 
@@ -172,7 +172,7 @@ public partial class u_employer_JobManage : System.Web.UI.Page
         }
         catch (Exception dsf)
         {
-            warn.Text = dsf.ToString();
+          
         }
     }
 
@@ -192,7 +192,7 @@ public partial class u_employer_JobManage : System.Web.UI.Page
         }
         catch (Exception ef)
         {
-            warn.Text = ef.ToString();
+          
         }
 
     }
@@ -204,4 +204,10 @@ public partial class u_employer_JobManage : System.Web.UI.Page
         workreqtimev.DataBind();
     }
 
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        bindgrid();
+    }
 }

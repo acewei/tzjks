@@ -33,7 +33,7 @@ public partial class CountSalary : System.Web.UI.Page
         DataSet ds = new DataSet();
         using (SqlConnection sqlconn = new SqlConnection(sqlconnstr))
         {
-            SqlDataAdapter sqld = new SqlDataAdapter("select SalaryId,SId,PostId,EmployerId,RealTotalHour,ShouldHour,LossHour,TotalPay,FinalPay,Payday from Salary", sqlconn);
+            SqlDataAdapter sqld = new SqlDataAdapter("select SalaryId,salary.SId,PostId,EmployerId,RealTotalHour,ShouldHour,LossHour,TotalPay,FinalPay,Payday,bcid from Salary,student where student.sid=salary.sid", sqlconn);
             sqld.Fill(ds, "tabSalary");
         }
         GridView1.DataSource = ds.Tables["tabSalary"].DefaultView;
