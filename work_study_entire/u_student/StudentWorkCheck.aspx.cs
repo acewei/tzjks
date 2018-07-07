@@ -27,9 +27,19 @@ public partial class StudentWorkCheck : System.Web.UI.Page
         }
     }
 
-   void bindgrid()
+   
+
+    void bindgrid()
     {
         GridView2.DataSource = DBManager.Query("select Student.SId,WorkInfo.Post,WorkCheck.IsAttend,WorkCheck.IsSettle,WorkCheck.DetailDate from WorkCheck,WorkInfo,Student where WorkCheck.Postid=WorkInfo.postid and student.sid='" + Session["username"].ToString() + "' and WorkCheck.SId=Student.SId and  WorkCheck.isfinishwc=1");
         GridView2.DataBind();
+    }
+
+
+
+    protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView2.PageIndex = e.NewPageIndex;
+        bindgrid();
     }
 }

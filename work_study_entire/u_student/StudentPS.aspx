@@ -22,11 +22,7 @@
     <br />
     <fieldset style="height: 100%; width: 100%">
         <legend class="auto-style6">工资查询</legend>
-        <br />
-        <br />
-        <p>
-            &nbsp;
-        </p>
+       
         <p>
 
             <span class="auto-style6">时间:&nbsp;&nbsp; </span>
@@ -37,18 +33,10 @@
             <asp:Button ID="Boxsearch" runat="server" Style="font-size: x-large" Text="查询" OnClick="Boxsearch_Click" />
 
         </p>
-        <p>
-            &nbsp;
-        </p>
-        <p>
-            &nbsp;
-        </p>
-        <p>
-        </p>
+        
+       
 
-        <table align="left" class="auto-style7">
-            <tr>
-                <td class="auto-style8">
+       
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
@@ -79,9 +67,7 @@
                     <br />
                     <br />
                     <br />
-                </td>
-            </tr>
-        </table>
+              
     </fieldset>
     <p>
     </p>

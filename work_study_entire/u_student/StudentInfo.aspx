@@ -37,8 +37,12 @@
                                             <td align="right" width="15%">开户行:
                                             </td>
                                             <td width="45%">
-                                                <asp:TextBox ID="tbbc" runat="server" Style="width: 250px" type="text" size="40"
-                                                    CssClass="text" Height="30px"></asp:TextBox>
+                                                <asp:DropDownList ID="tbbc" runat="server" Style="width: 250px" type="text" size="40"
+                                                    CssClass="text" Height="30px">
+                                                    <asp:ListItem>中国银行</asp:ListItem>
+                                                    <asp:ListItem>农业银行</asp:ListItem>
+                                                    <asp:ListItem>招商银行</asp:ListItem>
+                                                </asp:DropDownList>
 
                                             </td>
                                         </tr>
