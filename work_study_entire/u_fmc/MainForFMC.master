@@ -114,6 +114,9 @@
             border: 1px solid #8080C0;
             background-color: #8080C0;
         }
+        .auto-style6 {
+            width: 106px;
+        }
     </style>
 
     <form id="form1" runat="server">
@@ -170,7 +173,8 @@
                                 <ParentNodeStyle Font-Bold="False" Font-Size="Medium" Font-Strikeout="False" Font-Underline="False" />
                                 <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" />
                             </asp:TreeView>
-                       
+
+                    <div style="position:fixed;bottom:16px"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1464255946&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1464255946:51" alt="有问题，点击这里联系开发者" title="有问题，点击这里联系开发者"/></a></div>
                 </div>
                 <div class="div3">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
