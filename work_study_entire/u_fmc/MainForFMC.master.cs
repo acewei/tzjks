@@ -11,7 +11,11 @@ public partial class hchMasterPage : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-     
+        if (Session["username"] == null || Session["userid"].ToString() != "资助中心")
+        {
+            Session.Clear();
+            Response.Redirect("~/login.aspx");
+        }
     }
 
    

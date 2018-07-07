@@ -11,6 +11,7 @@ public partial class u_employer_JobManage : System.Web.UI.Page
     int alltimecount = Convert.ToInt32(DBManager.Query("select count(*) from time").Tables[0].Rows[0][0].ToString());
     protected void Page_Load(object sender, EventArgs e)
     {
+       
         //begin
         if (!IsPostBack)
         {

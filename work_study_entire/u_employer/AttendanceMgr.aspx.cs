@@ -10,7 +10,7 @@ public partial class _Default : System.Web.UI.Page
     public static bool flag =false ;
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        
         if (!IsPostBack)
         {
             
@@ -53,7 +53,8 @@ public partial class _Default : System.Web.UI.Page
 
     void bindgrid()
     {
-        GridView1.DataSource = DBManager.Query("select * from workcheck,workinfo,employer where workcheck.postid=workinfo.postid and workinfo.belongunit=employername and employerid='01'");
+        
+        GridView1.DataSource = DBManager.Query("select * from workcheck,workinfo,employer where workcheck.postid=workinfo.postid and workinfo.belongunit=employername and employername='"+Session["remark"]+"'");
         GridView1.DataBind();
     }
 
@@ -89,10 +90,10 @@ public partial class _Default : System.Web.UI.Page
         if (input1.Value == "") Page.ClientScript.RegisterClientScriptBlock(GetType(), "aa", "alert('请输入天数')", true);
         else
         {
-            DBManager.Nonquery("exec createWC " + input1.Value+",'01'");
+            DBManager.Nonquery("exec createWC " + input1.Value+",'"+DBManager.Query("select employerid from employer where employername='"+Session["remark"]+"'").Tables[0].Rows[0][0].ToString()+"'");
             
             bindgrid();
-            
+           
         }
     }
 
@@ -117,13 +118,19 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+
         string sql = "select * from WorkCheck,WorkInfo,Student where WorkCheck.Postid=WorkInfo.postid and WorkCheck.SId=Student.SId and " +
             "WorkCheck.isfinishwc=1 and detaildate>='" + t1.Text + "' and detaildate<='" + t2.Text + "' order by detaildate";
-        
-        GridView1.DataSource = DBManager.Query(sql);
-       
-        GridView1.DataBind();
-       
+        if (t1.Text != "" && t2.Text != "")
+        {
+            GridView1.DataSource = DBManager.Query(sql);
+
+            GridView1.DataBind();
+        }
+        else
+        {
+            bindgrid();
+        }
     }
 
     protected void Button3_Click(object sender, EventArgs e)

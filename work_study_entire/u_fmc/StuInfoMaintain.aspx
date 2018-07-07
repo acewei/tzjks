@@ -46,7 +46,7 @@
             OnPageIndexChanging="GridView1_PageIndexChanging" 
             AllowSorting="True" 
             OnRowDataBound="GridView1_RowDataBound"
-            PageSize="10"
+            PageSize="20"
             CssClass="GridViewStyle" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="4" Width="928px" BorderStyle="None"
             >
    

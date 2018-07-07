@@ -272,5 +272,6 @@ public partial class CountSalary : System.Web.UI.Page
     protected void Count_Click(object sender, EventArgs e)
     {
         DBManager.Nonquery("Exec countWages");
+        bindgrid();
     }
 }

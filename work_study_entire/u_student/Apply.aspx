@@ -28,6 +28,7 @@
             <SortedDescendingCellStyle BackColor="#EAEAD3" />
             <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
+        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
         详细描述：<br />
         <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" BorderStyle="Groove" Height="50px" Width="436px" DataKeyNames="postid">
             <Fields>
@@ -83,7 +84,7 @@
                         <asp:BoundField DataField="reviewer" HeaderText="审核人" />
                         <asp:TemplateField ShowHeader="False">
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="取消申请" OnClientClick="return confirm('确认取消此申请？')"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="取消申请" OnClientClick="return confirm('确认取消此申请？(若完成审核，则删除记录)')"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
